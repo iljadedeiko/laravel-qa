@@ -48,6 +48,10 @@
                                         {{ __('Remember Me') }}
                                     </label>
                                 </div>
+
+                                <div class="register-if-not mt-1">
+                                    <a href="{{ route('register') }}">{{ __('Not registered yet? Register now!') }}</a>
+                                </div>
                             </div>
                         </div>
 

@@ -34,17 +34,17 @@
                                     <div class="d-flex align-items-center">
                                         <h3 class="mt-0"><a href="{{ $question->url }}">{{ $question->title }}</a></h3>
                                         <div class="ml-auto">
-                                            @if ($auth::user()->can('update-question', $question))
+                                            @can('update', $question)
                                                 <a href="{{ route('questions.edit', $question->id) }}" class="btn btn-sm btn-outline-info">Edit</a>
-                                            @endif
+                                            @endcan
 
-                                            @if ($auth::user()->can('delete-question', $question))
+                                            @can('delete', $question)
                                                 <form class="form-delete" action="{{ route('questions.destroy', $question->id) }}" method="post">
                                                     @method('DELETE')
                                                     @csrf
                                                     <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure?')">Delete</button>
                                                 </form>
-                                            @endif
+                                            @endcan
                                         </div>
                                     </div>
 
