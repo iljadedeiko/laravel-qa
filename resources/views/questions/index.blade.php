@@ -23,7 +23,7 @@
                                         <strong>{{ $question->votes }}</strong> {{ $str::plural('vote', $question->votes) }}
                                     </div>
                                     <div class="status {{ $question->status }}">
-                                        <strong>{{ $question->answers }}</strong> {{ $str::plural('answer', $question->answers) }}
+                                        <strong>{{ $question->answers_count }}</strong> {{ $str::plural('answer', $question->answers_count) }}
                                     </div>
                                     <div class="view">
                                         {{ $question->views . " " . $str::plural('view', $question->views) }}
