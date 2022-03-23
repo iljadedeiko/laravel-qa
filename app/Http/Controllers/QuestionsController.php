@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AskQuestionRequest;
 use App\Models\Question;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Gate;
 
 class QuestionsController extends Controller
 {
+    public $str = "\Illuminate\Support\Str";
+
     public function __construct()
     {
         $this->middleware('auth', ['except' => ['index', 'show']]);
@@ -21,8 +24,8 @@ class QuestionsController extends Controller
     public function index()
     {
         $questions = Question::with('user')->latest()->paginate(5);
-        $str = "\Illuminate\Support\Str";
         $auth = "\Illuminate\Support\Facades\Auth";
+        $str = $this->str;
 
         return view('questions.index', compact('questions', 'str', 'auth'));
     }
@@ -61,8 +64,9 @@ class QuestionsController extends Controller
     public function show(Question $question)
     {
         $question->increment('views');
+        $str = $this->str;
 
-        return view('questions.show', compact('question'));
+        return view('questions.show', compact('question', 'str'));
     }
 
     /**
