@@ -14,7 +14,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        @include('layouts._messages')
+                        @include('layouts.messages')
 
                         @foreach($questions as $question)
                             <div class="media">
@@ -40,8 +40,9 @@
 
                                             @can('delete', $question)
                                                 <form class="form-delete" action="{{ route('questions.destroy', $question->id) }}" method="post">
-                                                    @method('DELETE')
                                                     @csrf
+                                                    @method('DELETE')
+
                                                     <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure?')">Delete</button>
                                                 </form>
                                             @endcan

@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AskQuestionRequest;
 use App\Models\Question;
-use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\App;
 
 class QuestionsController extends Controller
 {
@@ -23,7 +21,7 @@ class QuestionsController extends Controller
      */
     public function index()
     {
-        $questions = Question::with('user')->latest()->paginate(5);
+        $questions = Question::with('user')->latest()->paginate(8);
         $auth = "\Illuminate\Support\Facades\Auth";
         $str = $this->str;
 
@@ -52,7 +50,7 @@ class QuestionsController extends Controller
     {
         $request->user()->questions()->create($request->all());
 
-        return redirect()->route('questions.index')->with('success', "Your question has been submitted");
+        return redirect()->route('questions.index')->with('success', __('Your question has been submitted'));
     }
 
     /**
@@ -94,7 +92,7 @@ class QuestionsController extends Controller
         $this->authorize("update", $question);
 
         $question->update($request->only('title', 'body'));
-        return redirect('/questions')->with('success', "Your question has been updated.");
+        return redirect('/questions')->with('success', __('Your question has been updated.'));
     }
 
     /**
@@ -108,6 +106,6 @@ class QuestionsController extends Controller
         $this->authorize("delete", $question);
 
         $question->delete();
-        return redirect('/questions')->with('success', "Your question has been deleted.");
+        return redirect('/questions')->with('success', __('Your question has been deleted.'));
     }
 }

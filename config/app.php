@@ -232,4 +232,9 @@ return [
 
     ],
 
+    'languages' => [
+        'en' => 'English',
+        'lt' => 'Lithuanian',
+    ]
+
 ];

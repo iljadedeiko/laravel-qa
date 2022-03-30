@@ -10,8 +10,7 @@
                     @csrf
 
                     <div class="form-group">
-                        <textarea name="body" class="form-control {{ $errors->has('body') ? 'is-invalid' : '' }}" rows="7">
-                            {{ old('body') }}</textarea>
+                        <textarea name="body" class="form-control {{ $errors->has('body') ? 'is-invalid' : '' }}" rows="7">{{ old('body') }}</textarea>
                         @if ($errors->has('body'))
                             <div class="invalid-feedback">
                                 <strong>{{ $errors->first('body') }}</strong>

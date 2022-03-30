@@ -16,21 +16,47 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
-    return view('home');
+    return redirect(app()->getLocale());
 });
 
-Auth::routes();
+Route::group([
+    'prefix' => '{locale}',
+    'where' => ['locale' => '[a-zA-Z]{2}'],
+    'middleware' => 'setLocale',
+], function() {
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/', function () {
+        return view('home');
+    });
 
-//Route::get('/', [QuestionsController::class, 'index'])->name('questions.index');
+    Auth::routes();
 
-Route::resource('questions', QuestionsController::class)->except('show');
+    //laravel home route
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-//Route::post('/questions/{question}/answers', 'AnswersController@store')->name('answers.store');
-Route::resource('questions.answers', AnswersController::class)->except(['index', 'create', 'show']);
+    //question routes
+    Route::get('/questions', [QuestionsController::class, 'index'])->name('questions.index');
 
-Route::get('/questions/{slug}', [QuestionsController::class, 'show'])->name('questions.show');
+    Route::get('/questions/create', [QuestionsController::class, 'create'])->name('questions.create');
 
+    Route::post('/questions', [QuestionsController::class, 'store'])->name('questions.store');
+
+    Route::get('/questions/{slug}', [QuestionsController::class, 'show'])->name('questions.show');
+
+    Route::get('/questions/{question}/edit', [QuestionsController::class, 'edit'])->name('questions.edit');
+
+    Route::put('/questions/{question}', [QuestionsController::class, 'update'])->name('questions.update');
+
+    Route::delete('/questions/{question}', [QuestionsController::class, 'destroy'])->name('questions.destroy');
+
+    //answer routes
+    Route::post('questions/{question}/answers', [AnswersController::class, 'store'])->name('questions.answers.store');
+
+    Route::get('questions/{question}/answers/{answer}/edit', [AnswersController::class, 'edit'])->name('questions.answers.edit');
+
+    Route::put('questions/{question}/answers/{answer}', [AnswersController::class, 'update'])->name('questions.answers.update');
+
+    Route::delete('questions/{question}/answers/{answer}', [AnswersController::class, 'destroy'])->name('questions.answers.destroy');
+
+});
