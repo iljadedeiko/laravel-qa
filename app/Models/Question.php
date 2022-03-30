@@ -18,6 +18,11 @@ class Question extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function answers()
+    {
+        return $this->hasMany(Answer::class);
+    }
+
     public function setTitleAttribute($value)
     {
         $this->attributes['title'] = $value;
@@ -50,8 +55,4 @@ class Question extends Model
         return \Parsedown::instance()->text($this->body);
     }
 
-    public function answers()
-    {
-        return $this->hasMany(Answer::class);
-    }
 }

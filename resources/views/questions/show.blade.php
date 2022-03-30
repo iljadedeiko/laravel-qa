@@ -25,10 +25,10 @@
                             <a title="This question is not useful" class="vote-down off">
                                 <i class="fas fa-caret-down fa-3x"></i>
                             </a>
-                            <a title="Click to mark as favourite question" class="favourite mt-3 favourited">
-                                <i class="fas fa-star fa-2x"></i>
-                                <span class="favourite-count">123</span>
-                            </a>
+{{--                            <a title="Click to mark as favourite question" class="favourite mt-3 favourited">--}}
+{{--                                <i class="fas fa-star fa-2x"></i>--}}
+{{--                                <span class="favourite-count">123</span>--}}
+{{--                            </a>--}}
                         </div>
 
                         <div class="media-body">

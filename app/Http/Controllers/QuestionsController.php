@@ -90,9 +90,9 @@ class QuestionsController extends Controller
     public function update(AskQuestionRequest $request, Question $question)
     {
         $this->authorize("update", $question);
-
         $question->update($request->only('title', 'body'));
-        return redirect('/questions')->with('success', __('Your question has been updated.'));
+
+        return redirect()->route('questions.index')->with('success', __('Your question has been updated'));
     }
 
     /**
@@ -104,8 +104,8 @@ class QuestionsController extends Controller
     public function destroy(Question $question)
     {
         $this->authorize("delete", $question);
-
         $question->delete();
-        return redirect('/questions')->with('success', __('Your question has been deleted.'));
+
+        return redirect('/questions')->with('success', __('Your question has been deleted'));
     }
 }

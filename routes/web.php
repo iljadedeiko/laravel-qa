@@ -16,24 +16,21 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
-    return redirect(app()->getLocale());
-});
+//Route::get('/', function () {
+//    return redirect(app()->getLocale());
+//});
 
-Route::group([
-    'prefix' => '{locale}',
-    'where' => ['locale' => '[a-zA-Z]{2}'],
-    'middleware' => 'setLocale',
-], function() {
+//Route::group([
+//    'prefix' => '{locale}',
+//    'where' => ['locale' => '[a-zA-Z]{2}'],
+//    'middleware' => 'setLocale',
+//], function() {
 
     Route::get('/', function () {
         return view('home');
     });
 
     Auth::routes();
-
-    //laravel home route
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
 
     //question routes
     Route::get('/questions', [QuestionsController::class, 'index'])->name('questions.index');
@@ -59,4 +56,4 @@ Route::group([
 
     Route::delete('questions/{question}/answers/{answer}', [AnswersController::class, 'destroy'])->name('questions.answers.destroy');
 
-});
+//});
