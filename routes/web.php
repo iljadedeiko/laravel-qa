@@ -32,6 +32,9 @@ use Illuminate\Support\Facades\Route;
 
     Auth::routes();
 
+    //delete this
+    Route::get('/home', [HomeController::class, 'index']);
+
     //question routes
     Route::get('/questions', [QuestionsController::class, 'index'])->name('questions.index');
 

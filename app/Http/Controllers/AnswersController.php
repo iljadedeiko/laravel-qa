@@ -6,9 +6,14 @@ use App\Models\Answer;
 use App\Models\Question;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class AnswersController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -22,8 +27,8 @@ class AnswersController extends Controller
         ]);
 
         $question->answers()->create([
-                'body' => $request->body, 'user_id' => Auth::id()
-            ]);
+            'body' => $request->body, 'user_id' => Auth::id()
+        ]);
 
         return back()->with('success', __('Your answer was saved successfully'));
     }
@@ -36,7 +41,9 @@ class AnswersController extends Controller
      */
     public function edit(Question $question, Answer $answer)
     {
-        $this->authorize('update', $answer);
+        if (Gate::denies('update-answer', $answer)) {
+            abort(403, "Access denied");
+        }
 
         return view('answers.edit', compact('question', 'answer'));
     }
@@ -50,7 +57,9 @@ class AnswersController extends Controller
      */
     public function update(Request $request, Question $question, Answer $answer)
     {
-        $this->authorize('update', $answer);
+        if (Gate::denies('update-answer', $answer)) {
+            abort(403, "Access denied");
+        }
         $answer->update($request->validate([
             'body' => 'required',
         ]));
@@ -67,7 +76,9 @@ class AnswersController extends Controller
      */
     public function destroy(Question $question, Answer $answer)
     {
-        $this->authorize("delete", $answer);
+        if (Gate::denies('delete-answer', $answer)) {
+            abort(403, "Access denied");
+        }
         $answer->delete();
 
         return redirect()->route('questions.show', $question->slug)->with('success',

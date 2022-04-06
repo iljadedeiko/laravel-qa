@@ -41,11 +41,11 @@
                             <div class="row">
                                 <div class="col-4">
                                     <div class="ml-auto">
-                                        @can('update', $answer)
+                                        @can('update-answer', $answer)
                                             <a href="{{ route('questions.answers.edit', [$question->id, $answer->id]) }}" class="btn btn-sm btn-outline-info">{{ __('Edit') }}</a>
                                         @endcan
 
-                                        @can('delete', $answer)
+                                        @can('delete-answer', $answer)
                                             <form class="form-delete" action="{{ route('questions.answers.destroy', [$question->id, $answer->id]) }}" method="post">
                                                 @method('DELETE')
                                                 @csrf

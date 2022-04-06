@@ -7,9 +7,9 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="d-flex align-items-center">
-                            <h2>Edit Question</h2>
+                            <h2>{{ __('Edit Question') }}</h2>
                             <div class="ml-auto">
-                                <a href="{{ route('questions.index') }}" class="btn btn-outline-secondary">Back to all questions</a>
+                                <a href="{{ route('questions.index') }}" class="btn btn-outline-secondary">{{ __('Back to all questions') }}</a>
                             </div>
                         </div>
                     </div>
@@ -20,7 +20,7 @@
                             @method('PUT')
 
                             <div class="form-group">
-                                <label for="question-title">Question Title</label>
+                                <label for="question-title">{{ __('Question Title') }}</label>
                                 <input type="text" name="title" value="{{ old('title', $question->title) }}" id="question-title" class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}">
 
                                 @if ($errors->has('title'))
