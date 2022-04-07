@@ -10077,6 +10077,10 @@ form.form-delete {
 .vote-controls a.favourite.favourited, .vote-controls a.favourite.favourited:hover {
   color: #ffc107;
 }
-.vote-controls a.vote-accepted {
+.vote-controls a.answer-accepted {
   color: #28a745;
+}
+
+.mark-answer {
+  display: none;
 }

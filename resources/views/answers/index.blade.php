@@ -12,16 +12,29 @@
                     <div class="media">
 
                         <div class="d-flex flex-column vote-controls">
-                            <a title="This answer is useful" class="vote-up">
+                            <a title="{{ __('This answer is useful') }}" class="vote-up">
                                 <i class="fas fa-caret-up fa-3x"></i>
                             </a>
                             <span class="votes-count">1234</span>
-                            <a title="This answer is not useful" class="vote-down off">
+                            <a title="{{ __('This answer is not useful') }}" class="vote-down off">
                                 <i class="fas fa-caret-down fa-3x"></i>
                             </a>
-                            <a title="Mark this answer as best answer" class="vote-accepted mt-3">
-                                <i class="fas fa-check fa-2x"></i>
-                            </a>
+                            @can ('mark-answer', $answer)
+                                <a title="{{ __('Mark this answer as best answer') }}"
+                                    class="mt-3 {{ $answer->status }}"
+                                    onclick="event.preventDefault(); document.getElementById('mark-answer-{{ $answer->id }}').submit();">
+                                    <i class="fa fa-plus fa-2x"></i>
+                                </a>
+                                <form method="POST" class="mark-answer" action="{{ route('answers.mark', $answer->id) }}" id="mark-answer-{{ $answer->id }}">
+                                    @csrf
+                                </form>
+                            @else
+                                @if ($answer->best_answer)
+                                    <a title="{{ __('The question author marked this answer as best answer') }}" class="mt-3 {{ $answer->status }}">
+                                       <i class="fa fa-plus fa-2x"></i>
+                                    </a>
+                                @endif
+                            @endcan
                         </div>
 
                         <div class="media-body">
@@ -46,11 +59,11 @@
                                         @endcan
 
                                         @can('delete-answer', $answer)
-                                            <form class="form-delete" action="{{ route('questions.answers.destroy', [$question->id, $answer->id]) }}" method="post">
+                                            <form method="POST" class="form-delete" action="{{ route('questions.answers.destroy', [$question->id, $answer->id]) }}">
                                                 @method('DELETE')
                                                 @csrf
 
-                                                <button type="submit" class="btn btn-sm btn-outline-danger ml-1" onclick="return confirm('Are you sure?')">{{ __('Delete') }}</button>
+                                                <button type="submit" class="btn btn-sm btn-outline-danger ml-1" onclick="return confirm('{{ __('Are you sure?') }}')">{{ __('Delete') }}</button>
                                             </form>
                                         @endcan
                                     </div>

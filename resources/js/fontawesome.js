@@ -4,11 +4,13 @@ config.autoReplaceSvg = 'nest';
 import {faCaretUp,
     faCaretDown,
     faStar,
+    faPlus,
     faCheck } from '@fortawesome/free-solid-svg-icons';
 
 library.add(faCaretUp,
     faCaretDown,
     faStar,
+    faPlus,
     faCheck);
 
 dom.watch()

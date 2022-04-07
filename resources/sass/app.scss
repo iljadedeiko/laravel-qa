@@ -80,9 +80,13 @@ form.form-delete {
             }
         }
 
-        &.vote-accepted {
+        &.answer-accepted {
             color: $green;
         }
     }
+}
+
+.mark-answer {
+    display: none;
 }
 

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AnswersController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MarkAnswerController;
 use App\Http\Controllers\QuestionsController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -51,12 +52,13 @@ use Illuminate\Support\Facades\Route;
     Route::delete('/questions/{question}', [QuestionsController::class, 'destroy'])->name('questions.destroy');
 
     //answer routes
-    Route::post('questions/{question}/answers', [AnswersController::class, 'store'])->name('questions.answers.store');
+    Route::post('/questions/{question}/answers', [AnswersController::class, 'store'])->name('questions.answers.store');
 
-    Route::get('questions/{question}/answers/{answer}/edit', [AnswersController::class, 'edit'])->name('questions.answers.edit');
+    Route::get('/questions/{question}/answers/{answer}/edit', [AnswersController::class, 'edit'])->name('questions.answers.edit');
 
-    Route::put('questions/{question}/answers/{answer}', [AnswersController::class, 'update'])->name('questions.answers.update');
+    Route::put('/questions/{question}/answers/{answer}', [AnswersController::class, 'update'])->name('questions.answers.update');
 
-    Route::delete('questions/{question}/answers/{answer}', [AnswersController::class, 'destroy'])->name('questions.answers.destroy');
+    Route::delete('/questions/{question}/answers/{answer}', [AnswersController::class, 'destroy'])->name('questions.answers.destroy');
 
+    Route::post('/answers/{answer}/mark', ['middleware'=>'auth', 'uses' => MarkAnswerController::class])->name('answers.mark');
 //});
