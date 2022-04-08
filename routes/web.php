@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AnswersController;
+use App\Http\Controllers\FavouritesController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MarkAnswerController;
 use App\Http\Controllers\QuestionsController;
@@ -61,4 +62,9 @@ use Illuminate\Support\Facades\Route;
     Route::delete('/questions/{question}/answers/{answer}', [AnswersController::class, 'destroy'])->name('questions.answers.destroy');
 
     Route::post('/answers/{answer}/mark', ['middleware'=>'auth', 'uses' => MarkAnswerController::class])->name('answers.mark');
+
+    Route::delete('/questions/{question}/favourites', [FavouritesController::class, 'destroy'])->name('questions.unfavourite');
+
+    Route::post('/questions/{question}/favourites', [FavouritesController::class, 'store'])->name('questions.favourite');
+
 //});

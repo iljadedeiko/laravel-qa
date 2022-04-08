@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Parsedown;
 
@@ -49,7 +50,7 @@ class Question extends Model
     {
         if ($this->answers_count > 0) {
             if ($this->best_answer_id) {
-                return "answered-accepted";
+                return "answered-marked";
             }
             return "answered";
         }
@@ -59,6 +60,21 @@ class Question extends Model
     public function getBodyHtmlAttribute()
     {
         return \Parsedown::instance()->text($this->body);
+    }
+
+    public function favourites()
+    {
+        return $this->belongsToMany(User::class, 'favourites')->withTimestamps();
+    }
+
+    public function getFavouriteQuestionAttribute()
+    {
+        return $this->favourites()->where('user_id', Auth::id())->count() > 0;
+    }
+
+    public function getFavouritesCountAttribute()
+    {
+        return $this->favourites->count();
     }
 
 }

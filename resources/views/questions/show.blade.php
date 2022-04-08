@@ -18,17 +18,25 @@
                     <div class="media">
 
                         <div class="d-flex flex-column vote-controls">
-                            <a title="This question is useful" class="vote-up">
+                            <a title="{{ __('This question is useful') }}" class="vote-up">
                                 <i class="fas fa-caret-up fa-3x"></i>
                             </a>
                             <span class="votes-count">1234</span>
-                            <a title="This question is not useful" class="vote-down off">
+                            <a title="{{ __('This question is not useful') }}" class="vote-down off">
                                 <i class="fas fa-caret-down fa-3x"></i>
                             </a>
-{{--                            <a title="Click to mark as favourite question" class="favourite mt-3 favourited">--}}
-{{--                                <i class="fas fa-star fa-2x"></i>--}}
-{{--                                <span class="favourite-count">123</span>--}}
-{{--                            </a>--}}
+                            <a title="{{ __('Click to mark as favourite question') }}"
+                               class="favourite mt-3 {{ $auth::guest() ? 'off' : ($question->favourite_question ? 'favourited' : '') }}"
+                               onclick="event.preventDefault(); document.getElementById('favourite-question-{{ $question->id }}').submit();">
+                                <i class="fas fa-star fa-2x"></i>
+                                <span class="favourite-count">{{ $question->favourites_count }}</span>
+                            </a>
+                            <form method="POST" class="favourite-question" action="/questions/{{ $question->id }}/favourites" id="favourite-question-{{ $question->id }}">
+                                @csrf
+                                @if ($question->favourite_question)
+                                    @method ('DELETE')
+                                @endif
+                            </form>
                         </div>
 
                         <div class="media-body">

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Gate;
 class QuestionsController extends Controller
 {
     public $str = "\Illuminate\Support\Str";
+    public $auth = "\Illuminate\Support\Facades\Auth";
 
     public function __construct()
     {
@@ -22,7 +23,7 @@ class QuestionsController extends Controller
     public function index()
     {
         $questions = Question::with('user')->latest()->paginate(8);
-        $auth = "\Illuminate\Support\Facades\Auth";
+        $auth = $this->auth;
         $str = $this->str;
 
         return view('questions.index', compact('questions', 'str', 'auth'));
@@ -63,8 +64,9 @@ class QuestionsController extends Controller
     {
         $question->increment('views');
         $str = $this->str;
+        $auth = $this->auth;
 
-        return view('questions.show', compact('question', 'str'));
+        return view('questions.show', compact('question', 'str', 'auth'));
     }
 
     /**
