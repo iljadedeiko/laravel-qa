@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AskQuestionRequest;
+use App\Models\Category;
 use App\Models\Question;
 use Illuminate\Support\Facades\Gate;
 
@@ -22,11 +23,12 @@ class QuestionsController extends Controller
      */
     public function index()
     {
+        $categories = Category::all();
         $questions = Question::with('user')->latest()->paginate(8);
         $auth = $this->auth;
         $str = $this->str;
 
-        return view('questions.index', compact('questions', 'str', 'auth'));
+        return view('questions.index', compact('questions', 'str', 'auth', 'categories'));
     }
 
     /**
@@ -36,9 +38,10 @@ class QuestionsController extends Controller
      */
     public function create()
     {
+        $categories = Category::all();
         $question = new Question();
 
-        return view('questions.create', compact('question'));
+        return view('questions.create', compact('question', 'categories'));
     }
 
     /**
@@ -80,8 +83,10 @@ class QuestionsController extends Controller
         if (Gate::denies('update-question', $question)) {
             abort(403, "Access denied");
         }
+        $categories = Category::all();
+        $questionCat = Category::where('id', $question->category_id)->first();
 
-        return view("questions.edit", compact('question'));
+        return view("questions.edit", compact('question', 'categories', 'questionCat'));
     }
 
     /**
@@ -96,7 +101,7 @@ class QuestionsController extends Controller
         if (Gate::denies('update-question', $question)) {
             abort(403, "Access denied");
         }
-        $question->update($request->only('title', 'body'));
+        $question->update($request->only('category_id', 'title', 'body'));
 
         return redirect()->route('questions.index')->with('success', __('Your question has been updated'));
     }

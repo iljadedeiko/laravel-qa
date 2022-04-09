@@ -15,7 +15,7 @@
                     </div>
 
                     <div class="card-body">
-                        <form action="{{ route('questions.update', $question->id) }}" method="post">
+                        <form action="{{ route('questions.update', $question->id) }}" method="POST">
                             @csrf
                             @method('PUT')
 
@@ -29,6 +29,17 @@
                                     </div>
                                 @endif
                             </div>
+
+                            <div class="form-group">
+                                <select class="custom-select custom-select-lg mb-3" name="category_id" id="category_id">
+                                    <option value="" selected>{{ __('Update category (Optional)') }}</option>
+                                    @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}" {{ $category->id == $question->category_id ? 'selected' : ''}}>
+                                                {{ $category->category_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
                             <div class="form-group">
                                 <label for="question-body">{{ __('Your question') }}</label>
                                 <textarea name="body" id="question-body" rows="10" class="form-control {{ $errors->has('body') ? 'is-invalid' : '' }}">{{ old('body', $question->body) }}</textarea>

@@ -12,7 +12,7 @@ class Question extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'body'];
+    protected $fillable = ['category_id' ,'title', 'body'];
 
     public function user()
     {
@@ -22,6 +22,11 @@ class Question extends Model
     public function answers()
     {
         return $this->hasMany(Answer::class);
+    }
+
+    public function catogory()
+    {
+        return $this->belongsTo(Category::class)->withTimestamps();
     }
 
     public function setTitleAttribute($value)

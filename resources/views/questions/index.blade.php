@@ -7,8 +7,18 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="d-flex align-items-center">
-                            <h2>{{ __('All Questions') }}</h2>
-                            <div class="ml-auto">
+                            <h2 class="mr-auto">{{ __('All Questions') }}</h2>
+                            <div class="dropdown pr-4">
+                                <button type="button" class="btn btn-outline-secondary dropdown-toggle px-4" data-toggle="dropdown">
+                                    {{ __('Category') }}
+                                </button>
+                                <div class="dropdown-menu categories">
+                                    @foreach ($categories as $category)
+                                        <a class="dropdown-item" href="#">{{ $category->category_name }}</a>
+                                    @endforeach
+                                </div>
+                            </div>
+                            <div class="ask-question">
                                 <a href="{{ route('questions.create') }}" class="btn btn-outline-secondary">{{ __('Ask Question') }}</a>
                             </div>
                         </div>

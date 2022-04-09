@@ -15,6 +15,7 @@ class CreateQuestionsTable extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('category_id')->nullable();
             $table->string('title');
             $table->string('slug')->unique();
             $table->text('body');
@@ -26,6 +27,8 @@ class CreateQuestionsTable extends Migration
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('CASCADE');
+            $table->foreign('category_id')->references('id')->on('categories')
+                ->onDelete('SET NULL')->onUpdate('SET NULL');
         });
     }
 
