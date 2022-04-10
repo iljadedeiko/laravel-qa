@@ -54,33 +54,12 @@
 </template>
 
 <script>
-    // export default {
-    //     data: function() {
-    //         return {
-    //             categories: [],
-    //             questions: []
-    //         }
-    //     },
-    //
-    //     mounted() {
-    //         this.loadQuestions();
-    //         this.loadQuestions();
-    //     },
-    //
-    //     methods: {
-    //         loadCategories: function() {
-    //             axios.get('/api/categories')
-    //                 .then((response) => {
-    //                     this.categories = response.data.data;
-    //                 })
-    //                 .catch(function(error) {
-    //                     console.log(error);
-    //                 });
-    //         },
-    //
-    //         loadQuestions: function() {
-    //
-    //         }
-    //     }
-    // }
+    export default {
+        props: ['questions'],
+        data: function() {
+            return {
+
+            }
+        },
+    }
 </script>

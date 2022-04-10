@@ -66,5 +66,4 @@ use Illuminate\Support\Facades\Route;
     Route::delete('/questions/{question}/favourites', [FavouritesController::class, 'destroy'])->name('questions.unfavourite');
 
     Route::post('/questions/{question}/favourites', [FavouritesController::class, 'store'])->name('questions.favourite');
-
 //});

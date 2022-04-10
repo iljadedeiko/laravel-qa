@@ -25,7 +25,6 @@ class QuestionsController extends Controller
     {
         $categories = Category::all();
         $questions = Question::with('user')
-//            ->where('category_id', 3)
             ->latest()->paginate(8);
         $auth = $this->auth;
         $str = $this->str;

@@ -8,16 +8,15 @@
                     <div class="card-header">
                         <div class="d-flex align-items-center">
                             <h2 class="mr-auto">{{ __('All Questions') }}</h2>
-                            <div class="dropdown pr-4">
-                                <button type="button" class="btn btn-outline-secondary dropdown-toggle px-4" data-toggle="dropdown">
-                                    {{ __('Category') }}
-                                </button>
-                                <div class="dropdown-menu categories">
-                                    @foreach ($categories as $category)
-                                        <a class="dropdown-item" href="#">{{ $category->category_name }}</a>
-                                    @endforeach
-                                </div>
-                            </div>
+{{--                            <div class="dropdown pr-4">--}}
+{{--                                <select class="form-control categories" name="categories" id="categories">--}}
+{{--                                    <option selected>{{ __('All questions') }}</option>--}}
+{{--                                    @foreach ($categories as $category)--}}
+{{--                                        <option value="{{ $category->id }}">{{ $category->category_name }}</option>--}}
+{{--                                    @endforeach--}}
+{{--                                </select>--}}
+{{--                            </div>--}}
+                            <categories :categories="{{$categories}}"></categories>
                             <div class="ask-question">
                                 <a href="{{ route('questions.create') }}" class="btn btn-outline-secondary">{{ __('Ask Question') }}</a>
                             </div>
@@ -44,6 +43,10 @@
                                     <div class="d-flex align-items-center">
                                         <h3 class="mt-0"><a href="{{ $question->url }}">{{ $question->title }}</a></h3>
                                         <div class="ml-auto">
+                                            @if (!empty($question->category->category_name))
+                                                <h4 class="text-primary font-weight-bold">{{ $question->category->category_name }}</h4>
+                                            @endif
+
                                             @can('update-question', $question)
                                                 <a href="{{ route('questions.edit', $question->id) }}" class="btn btn-sm btn-outline-info">{{ __('Edit') }}</a>
                                             @endcan

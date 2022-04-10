@@ -1,45 +1,32 @@
 <template>
     <div class="dropdown pr-4">
-        <button type="button" class="btn btn-outline-secondary dropdown-toggle px-4" data-toggle="dropdown">
-            Category
-        </button>
-        <div class="dropdown-menu categories">
-    <!--        <a class="dropdown-item" href="#">{{ $category->category_name }}</a>-->
-            <a class="dropdown-item" v-for="category in categories">
+        <select class="form-control categories" name="categories" id="categories">
+            <option selected @click="selectedAll()">All questions</option>
+            <option v-for="category in this.categories" v-bind:value="category.id" @click="selectedCat(category.id)">
                 {{ category.category_name }}
-            </a>
-        </div>
+            </option>
+        </select>
     </div>
 </template>
 
 <script>
     export default {
-        data: function() {
+        props: ['categories'],
+        data: function (){
             return {
-                categories: [],
-                questions: []
+                selectedCategory: '',
             }
         },
-
-        mounted() {
-            this.loadCategories();
-            this.loadQuestions();
-        },
-
         methods: {
-            loadCategories: function() {
-                axios.get('/api/categories')
-                    .then((response) => {
-                        this.categories = response.data.data;
-                    })
-                    .catch(function(error) {
-                        console.log(error);
-                    });
-            },
-
-            loadQuestions: function() {
-
+            sectedCat: function (id){
+                this.selectedCategory = id;
+            }
+        },
+        computed: {
+            filteredCategories: function (){
+                return this.categories.filter((item) => item.category_id === this.selectedCategory);
             }
         }
+
     }
 </script>
