@@ -8,6 +8,9 @@
                 <div class="card-body">
                     <div class="card-title">
                         <div class="d-flex align-items-center">
+                            @if (!empty($question->category->category_name))
+                                <h3 class="mr-3 text-primary font-weight-bold">{{ $question->category->category_name }}</h3>
+                            @endif
                             <h1>{{ $question->title }}</h1>
                             <div class="ml-auto">
                                 <a href="{{ route('questions.index') }}" class="btn btn-outline-secondary">{{ __('Back to all questions') }}</a>

@@ -24,9 +24,9 @@ class Question extends Model
         return $this->hasMany(Answer::class);
     }
 
-    public function catogory()
+    public function category()
     {
-        return $this->belongsTo(Category::class)->withTimestamps();
+        return $this->belongsTo(Category::class);
     }
 
     public function setTitleAttribute($value)
