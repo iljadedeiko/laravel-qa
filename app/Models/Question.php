@@ -29,6 +29,16 @@ class Question extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function favorites()
+    {
+        return $this->belongsToMany(User::class, 'favorites')->withTimestamps();
+    }
+
+    public function voteQuestions()
+    {
+        return $this->belongsToMany(User::class, 'vote_questions');
+    }
+
     public function setTitleAttribute($value)
     {
         $this->attributes['title'] = $value;
@@ -67,19 +77,13 @@ class Question extends Model
         return \Parsedown::instance()->text($this->body);
     }
 
-    public function favourites()
+    public function getFavoriteQuestionAttribute()
     {
-        return $this->belongsToMany(User::class, 'favourites')->withTimestamps();
+        return $this->favorites()->where('user_id', Auth::id())->count() > 0;
     }
 
-    public function getFavouriteQuestionAttribute()
+    public function getFavoritesCountAttribute()
     {
-        return $this->favourites()->where('user_id', Auth::id())->count() > 0;
+        return $this->favorites->count();
     }
-
-    public function getFavouritesCountAttribute()
-    {
-        return $this->favourites->count();
-    }
-
 }

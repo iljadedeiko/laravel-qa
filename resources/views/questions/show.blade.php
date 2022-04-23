@@ -19,24 +19,43 @@
                     </div>
                     <hr>
                     <div class="media">
-
                         <div class="d-flex flex-column vote-controls">
-                            <a title="{{ __('This question is useful') }}" class="vote-up">
+                            <a title="{{ __('This question is useful') }}"
+                                class="vote-up {{ \Illuminate\Support\Facades\Auth::guest() ? 'off' : '' }}
+                                {{ ($question->user->id == \Illuminate\Support\Facades\Auth::id()) ? 'off' : '' }}"
+                                onclick="event.preventDefault(); document.getElementById( 'up-vote-question-{{ $question->id }}').submit();">
                                 <i class="fas fa-caret-up fa-3x"></i>
                             </a>
-                            <span class="votes-count">1234</span>
-                            <a title="{{ __('This question is not useful') }}" class="vote-down off">
+
+                            <form method="POST" class="up-vote-question" action="/questions/{{ $question->id }}/vote-question" id="up-vote-question-{{ $question->id }}">
+                                @csrf
+                                <input type="hidden" name="vote_question" value="1">
+                            </form>
+
+                            <span class="votes-count">{{ $question->votes }}</span>
+                            <a title="{{ __('This question is not useful') }}"
+                                class="vote-down {{ \Illuminate\Support\Facades\Auth::guest() ? 'off' : '' }}
+                                {{ ($question->user->id == \Illuminate\Support\Facades\Auth::id()) ? 'off' : '' }}"
+                                onclick="event.preventDefault(); document.getElementById( 'down-vote-question-{{ $question->id }}').submit();">
                                 <i class="fas fa-caret-down fa-3x"></i>
                             </a>
-                            <a title="{{ __('Click to mark as favourite question') }}"
-                               class="favourite mt-3 {{ $auth::guest() ? 'off' : ($question->favourite_question ? 'favourited' : '') }}"
-                               onclick="event.preventDefault(); document.getElementById('favourite-question-{{ $question->id }}').submit();">
-                                <i class="fas fa-star fa-2x"></i>
-                                <span class="favourite-count">{{ $question->favourites_count }}</span>
-                            </a>
-                            <form method="POST" class="favourite-question" action="/questions/{{ $question->id }}/favourites" id="favourite-question-{{ $question->id }}">
+
+                            <form method="POST" class="down-vote-question" action="/questions/{{ $question->id }}/vote-question" id="down-vote-question-{{ $question->id }}">
                                 @csrf
-                                @if ($question->favourite_question)
+                                <input type="hidden" name="vote_question" value="-1">
+                            </form>
+
+                            <a title="{{ __('Click to mark as favorite question') }}"
+                               class="favorite mt-3 {{ $auth::guest() ? 'off' : ($question->favorite_question ? 'favorited' : '') }}
+                               {{ ($question->user->id == \Illuminate\Support\Facades\Auth::id()) ? 'off' : '' }}"
+                               onclick="event.preventDefault(); document.getElementById('favorite-question-{{ $question->id }}').submit();">
+                                <i class="fas fa-star fa-2x"></i>
+                                <span class="favorite-count">{{ $question->favorites_count }}</span>
+                            </a>
+
+                            <form method="POST" class="favorite-question" action="/questions/{{ $question->id }}/favorites" id="favorite-question-{{ $question->id }}">
+                                @csrf
+                                @if ($question->favorite_question)
                                     @method ('DELETE')
                                 @endif
                             </form>

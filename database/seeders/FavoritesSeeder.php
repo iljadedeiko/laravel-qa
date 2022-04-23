@@ -6,7 +6,7 @@ use App\Models\Question;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
-class FavouritesSeeder extends Seeder
+class FavoritesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -21,7 +21,7 @@ class FavouritesSeeder extends Seeder
         foreach (Question::all() as $question) {
             for ($i = 0; $i < rand(1, $usersCount); $i++) {
                 $user = $users[$i];
-                $question->favourites()->attach($user);
+                $question->favorites()->attach($user);
             }
         }
     }

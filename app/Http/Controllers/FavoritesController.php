@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Question;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 
-class FavouritesController extends Controller
+class FavoritesController extends Controller
 {
     public function __construct()
     {
@@ -14,13 +15,13 @@ class FavouritesController extends Controller
 
     public function store(Question $question)
     {
-        $question->favourites()->attach(Auth::id());
+        $question->favorites()->attach(Auth::id());
         return back();
     }
 
     public function destroy(Question $question)
     {
-        $question->favourites()->detach(Auth::id());
+        $question->favorites()->detach(Auth::id());
         return back();
     }
 }

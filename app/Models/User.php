@@ -50,6 +50,21 @@ class User extends Authenticatable
         return $this->hasMany(Answer::class);
     }
 
+    public function favorites()
+    {
+        return $this->belongsToMany(Question::class, 'favorites')->withTimestamps();
+    }
+
+    public function voteQuestions()
+    {
+        return $this->belongsToMany(Question::class, 'vote_questions');
+    }
+
+    public function voteAnswers()
+    {
+        return $this->belongsToMany(Answer::class, 'vote_answers');
+    }
+
     public function getUrlAttribute() {
 //        return route("question.show", $this->id);
         return '#';
@@ -63,8 +78,19 @@ class User extends Authenticatable
         return "https://www.gravatar.com/avatar/" . md5(strtolower(trim($email))) . "?s=" . $size;
     }
 
-    public function favourites()
+    public function voteQuestion(Question $question, $vote)
     {
-        return $this->belongsToMany(Question::class, 'favourites')->withTimestamps();
+        $voteQuestions = $this->voteQuestions();
+        if ($voteQuestions->where('question_id', $question->id)->exists()) {
+            $voteQuestions->updateExistingPivot($question, ['votes_sum' => $vote]);
+        } else {
+            $voteQuestions->attach($question, ['votes_sum' => $vote]);
+        }
+
+        $question->load('voteQuestions');
+        $votesDown = $question->voteQuestions()->wherePivot('votes_sum', -1)->sum('votes_sum');
+        $votesUp = $question->voteQuestions()->wherePivot('votes_sum', 1)->sum('votes_sum');
+        $question->votes = (int)$votesDown + (int)$votesUp;
+        $question->save();
     }
 }
