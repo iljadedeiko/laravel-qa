@@ -5,6 +5,7 @@ use App\Http\Controllers\FavoritesController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MarkAnswerController;
 use App\Http\Controllers\QuestionsController;
+use App\Http\Controllers\VoteAnswerController;
 use App\Http\Controllers\VoteQuestionController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -62,11 +63,17 @@ use Illuminate\Support\Facades\Route;
 
     Route::delete('/questions/{question}/answers/{answer}', [AnswersController::class, 'destroy'])->name('questions.answers.destroy');
 
-    Route::post('/answers/{answer}/mark', ['middleware'=>'auth', 'uses' => MarkAnswerController::class])->name('answers.mark');
+    Route::post('/answers/{answer}/mark', ['middleware' => 'auth', 'uses' => MarkAnswerController::class])->name('answers.mark');
 
+    //favorites routes
     Route::delete('/questions/{question}/favorites', [FavoritesController::class, 'destroy'])->name('questions.unfavorite');
 
     Route::post('/questions/{question}/favorites', [FavoritesController::class, 'store'])->name('questions.favorite');
 
-    Route::post('/questions/{question}/vote-question', ['middleware'=>'auth', 'uses' => VoteQuestionController::class]);
+    //vote answer route
+    Route::post('/answers/{answer}/vote-answer', ['middleware' => 'auth', 'uses' => VoteAnswerController::class]);
+
+    //vote question route
+    Route::post('/questions/{question}/vote-question', ['middleware' => 'auth', 'uses' => VoteQuestionController::class]);
+
 //});

@@ -10084,3 +10084,11 @@ form.form-delete {
 .mark-answer {
   display: none;
 }
+
+.navigation-menu {
+  background-color: #84A9E3;
+}
+
+.app-logo {
+  width: 50px;
+}

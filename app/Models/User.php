@@ -78,6 +78,22 @@ class User extends Authenticatable
         return "https://www.gravatar.com/avatar/" . md5(strtolower(trim($email))) . "?s=" . $size;
     }
 
+    public function voteAnswer(Answer $answer, $vote)
+    {
+        $voteAnswers = $this->voteAnswers();
+        if ($voteAnswers->where('answer_id', $answer->id)->exists()) {
+            $voteAnswers->updateExistingPivot($answer, ['votes_sum' => $vote]);
+        } else {
+            $voteAnswers->attach($answer, ['votes_sum' => $vote]);
+        }
+
+        $answer->load('voteAnswers');
+        $votesDown = $answer->voteAnswers()->wherePivot('votes_sum', -1)->sum('votes_sum');
+        $votesUp = $answer->voteAnswers()->wherePivot('votes_sum', 1)->sum('votes_sum');
+        $answer->votes_count = (int)$votesDown + (int)$votesUp;
+        $answer->save();
+    }
+
     public function voteQuestion(Question $question, $vote)
     {
         $voteQuestions = $this->voteQuestions();
@@ -90,7 +106,7 @@ class User extends Authenticatable
         $question->load('voteQuestions');
         $votesDown = $question->voteQuestions()->wherePivot('votes_sum', -1)->sum('votes_sum');
         $votesUp = $question->voteQuestions()->wherePivot('votes_sum', 1)->sum('votes_sum');
-        $question->votes = (int)$votesDown + (int)$votesUp;
+        $question->votes_count = (int)$votesDown + (int)$votesUp;
         $question->save();
     }
 }

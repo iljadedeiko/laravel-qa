@@ -23,24 +23,25 @@
                             <a title="{{ __('This question is useful') }}"
                                 class="vote-up {{ \Illuminate\Support\Facades\Auth::guest() ? 'off' : '' }}
                                 {{ ($question->user->id == \Illuminate\Support\Facades\Auth::id()) ? 'off' : '' }}"
-                                onclick="event.preventDefault(); document.getElementById( 'up-vote-question-{{ $question->id }}').submit();">
+                                onclick="event.preventDefault(); document.getElementById( 'vote-up-question-{{ $question->id }}').submit();">
                                 <i class="fas fa-caret-up fa-3x"></i>
                             </a>
 
-                            <form method="POST" class="up-vote-question" action="/questions/{{ $question->id }}/vote-question" id="up-vote-question-{{ $question->id }}">
+                            <form method="POST" class="vote-up-question" action="/questions/{{ $question->id }}/vote-question" id="vote-up-question-{{ $question->id }}">
                                 @csrf
                                 <input type="hidden" name="vote_question" value="1">
                             </form>
 
-                            <span class="votes-count">{{ $question->votes }}</span>
+                            <span class="votes-count">{{ $question->votes_count }}</span>
+
                             <a title="{{ __('This question is not useful') }}"
                                 class="vote-down {{ \Illuminate\Support\Facades\Auth::guest() ? 'off' : '' }}
                                 {{ ($question->user->id == \Illuminate\Support\Facades\Auth::id()) ? 'off' : '' }}"
-                                onclick="event.preventDefault(); document.getElementById( 'down-vote-question-{{ $question->id }}').submit();">
+                                onclick="event.preventDefault(); document.getElementById( 'vote-down-question-{{ $question->id }}').submit();">
                                 <i class="fas fa-caret-down fa-3x"></i>
                             </a>
 
-                            <form method="POST" class="down-vote-question" action="/questions/{{ $question->id }}/vote-question" id="down-vote-question-{{ $question->id }}">
+                            <form method="POST" class="vote-down-question" action="/questions/{{ $question->id }}/vote-question" id="vote-down-question-{{ $question->id }}">
                                 @csrf
                                 <input type="hidden" name="vote_question" value="-1">
                             </form>
