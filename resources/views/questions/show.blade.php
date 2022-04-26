@@ -20,35 +20,48 @@
                     <hr>
                     <div class="media">
                         <div class="d-flex flex-column vote-controls">
-                            <a title="{{ __('This question is useful') }}"
-                                class="vote-up {{ \Illuminate\Support\Facades\Auth::guest() ? 'off' : '' }}
-                                {{ ($question->user->id == \Illuminate\Support\Facades\Auth::id()) ? 'off' : '' }}"
-                                onclick="event.preventDefault(); document.getElementById( 'vote-up-question-{{ $question->id }}').submit();">
-                                <i class="fas fa-caret-up fa-3x"></i>
-                            </a>
 
-                            <form method="POST" class="vote-up-question" action="/questions/{{ $question->id }}/vote-question" id="vote-up-question-{{ $question->id }}">
-                                @csrf
-                                <input type="hidden" name="vote_question" value="1">
-                            </form>
+                            @cannot ('vote-own-question', $question)
+                                <a title="{{ __('Mark this question as useful') }}"
+                                    class="vote-up {{ $auth::guest() ? 'off' : '' }}
+                                    {{ ($question->user->id == $auth::id()) ? 'off' : '' }}"
+                                    onclick="event.preventDefault(); document.getElementById( 'vote-up-question-{{ $question->id }}').submit();">
+                                    <i class="fas fa-caret-up fa-3x"></i>
+                                </a>
 
-                            <span class="votes-count">{{ $question->votes_count }}</span>
+                                <form method="POST" class="vote-up-question" action="/questions/{{ $question->id }}/vote-question" id="vote-up-question-{{ $question->id }}">
+                                    @csrf
+                                    <input type="hidden" name="vote_question" value="1">
+                                </form>
 
-                            <a title="{{ __('This question is not useful') }}"
-                                class="vote-down {{ \Illuminate\Support\Facades\Auth::guest() ? 'off' : '' }}
-                                {{ ($question->user->id == \Illuminate\Support\Facades\Auth::id()) ? 'off' : '' }}"
-                                onclick="event.preventDefault(); document.getElementById( 'vote-down-question-{{ $question->id }}').submit();">
-                                <i class="fas fa-caret-down fa-3x"></i>
-                            </a>
+                                <span class="votes-count">{{ $question->votes_count }}</span>
 
-                            <form method="POST" class="vote-down-question" action="/questions/{{ $question->id }}/vote-question" id="vote-down-question-{{ $question->id }}">
-                                @csrf
-                                <input type="hidden" name="vote_question" value="-1">
-                            </form>
+                                <a title="{{ __('Mark this question as not useful') }}"
+                                    class="vote-down {{ $auth::guest() ? 'off' : '' }}
+                                    {{ ($question->user->id == $auth::id()) ? 'off' : '' }}"
+                                    onclick="event.preventDefault(); document.getElementById( 'vote-down-question-{{ $question->id }}').submit();">
+                                    <i class="fas fa-caret-down fa-3x"></i>
+                                </a>
+
+                                <form method="POST" class="vote-down-question" action="/questions/{{ $question->id }}/vote-question" id="vote-down-question-{{ $question->id }}">
+                                    @csrf
+                                    <input type="hidden" name="vote_question" value="-1">
+                                </form>
+                            @else
+                                <a title="{{ __('You can not vote for your own question') }}" class="off cursor-not-allowed">
+                                    <i class="fas fa-caret-up fa-3x"></i>
+                                </a>
+
+                                <span class="votes-count">{{ $question->votes_count }}</span>
+
+                                <a title="{{ __('You can not vote for your own question') }}" class="off cursor-not-allowed">
+                                    <i class="fas fa-caret-down fa-3x"></i>
+                                </a>
+                            @endcannot
 
                             <a title="{{ __('Click to mark as favorite question') }}"
                                class="favorite mt-3 {{ $auth::guest() ? 'off' : ($question->favorite_question ? 'favorited' : '') }}
-                               {{ ($question->user->id == \Illuminate\Support\Facades\Auth::id()) ? 'off' : '' }}"
+                               {{ ($question->user->id == $auth::id()) ? 'off' : '' }}"
                                onclick="event.preventDefault(); document.getElementById('favorite-question-{{ $question->id }}').submit();">
                                 <i class="fas fa-star fa-2x"></i>
                                 <span class="favorite-count">{{ $question->favorites_count }}</span>
@@ -84,7 +97,8 @@
 
     @include ('answers.index', [
         'answers' => $question->answers,
-        'answersCount' => $question->answers_count
+        'answersCount' => $question->answers_count,
+        'auth' => $auth,
     ])
 
     @include ('answers.create')

@@ -15,7 +15,7 @@ class MarkAnswerController extends Controller
      */
     public function __invoke(Answer $answer)
     {
-        if (Gate::denies('mark-answer', $answer)) {
+        if (Gate::denies('mark-best-answer', $answer)) {
             abort(403, "Access denied");
         }
 

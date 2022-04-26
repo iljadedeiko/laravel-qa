@@ -42,8 +42,16 @@ class AuthServiceProvider extends ServiceProvider
             return $user->id === $answer->user_id;
         });
 
-        Gate::define('mark-answer', function($user, $answer) {
+        Gate::define('mark-best-answer', function($user, $answer) {
             return $user->id === $answer->question->user_id;
+        });
+
+        Gate::define('vote-own-answer', function($user, $answer) {
+            return $user->id === $answer->question->user_id;
+        });
+
+        Gate::define('vote-own-question', function($user, $question) {
+            return $user->id === $question->user_id;
         });
     }
 }

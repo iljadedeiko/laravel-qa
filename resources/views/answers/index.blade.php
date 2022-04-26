@@ -12,33 +12,46 @@
                     <div class="media">
 
                         <div class="d-flex flex-column vote-controls">
-                            <a title="{{ __('This answer is useful') }}"
-                               class="vote-up {{ \Illuminate\Support\Facades\Auth::guest() ? 'off' : '' }}
-                               {{ ($question->user->id == \Illuminate\Support\Facades\Auth::id()) ? 'off' : '' }}"
-                               onclick="event.preventDefault(); document.getElementById( 'vote-up-answer-{{ $answer->id }}').submit();">
-                                <i class="fas fa-caret-up fa-3x"></i>
-                            </a>
 
-                            <form method="POST" class="vote-up-answer" action="/answers/{{ $answer->id }}/vote-answer" id="vote-up-answer-{{ $answer->id }}">
-                                @csrf
-                                <input type="hidden" name="vote_answer" value="1">
-                            </form>
+                            @cannot ('vote-own-answer', $answer)
+                                <a title="{{ __('Mark this question as useful') }}"
+                                   class="vote-up {{ $auth::guest() ? 'off' : '' }}
+                                   {{ ($question->user->id == $auth::id()) ? 'off' : '' }}"
+                                   onclick="event.preventDefault(); document.getElementById( 'vote-up-answer-{{ $answer->id }}').submit();">
+                                    <i class="fas fa-caret-up fa-3x"></i>
+                                </a>
 
-                            <span class="votes-count">{{ $answer->votes_count }}</span>
+                                <form method="POST" class="vote-up-answer" action="/answers/{{ $answer->id }}/vote-answer" id="vote-up-answer-{{ $answer->id }}">
+                                    @csrf
+                                    <input type="hidden" name="vote_answer" value="1">
+                                </form>
 
-                            <a title="{{ __('This answer is not useful') }}"
-                               class="vote-down {{ \Illuminate\Support\Facades\Auth::guest() ? 'off' : '' }}
-                               {{ ($answer->user->id == \Illuminate\Support\Facades\Auth::id()) ? 'off' : '' }}"
-                               onclick="event.preventDefault(); document.getElementById('vote-down-answer-{{ $answer->id }}').submit();">
-                                <i class="fas fa-caret-down fa-3x"></i>
-                            </a>
+                                <span class="votes-count">{{ $answer->votes_count }}</span>
 
-                            <form method="POST" class="vote-down-answer" action="/answers/{{ $answer->id }}/vote-answer" id="vote-down-answer-{{ $answer->id }}">
-                                @csrf
-                                <input type="hidden" name="vote_answer" value="-1">
-                            </form>
+                                <a title="{{ __('Mark this question as not useful') }}"
+                                   class="vote-down {{ $auth::guest() ? 'off' : '' }}
+                                   {{ ($answer->user->id == $auth::id()) ? 'off' : '' }}"
+                                   onclick="event.preventDefault(); document.getElementById('vote-down-answer-{{ $answer->id }}').submit();">
+                                    <i class="fas fa-caret-down fa-3x"></i>
+                                </a>
 
-                            @can ('mark-answer', $answer)
+                                <form method="POST" class="vote-down-answer" action="/answers/{{ $answer->id }}/vote-answer" id="vote-down-answer-{{ $answer->id }}">
+                                    @csrf
+                                    <input type="hidden" name="vote_answer" value="-1">
+                                </form>
+                            @else
+                                <a title="{{ __('You can not vote for your own answer') }}" class="off cursor-not-allowed">
+                                    <i class="fas fa-caret-up fa-3x"></i>
+                                </a>
+
+                                <span class="votes-count">{{ $answer->votes_count }}</span>
+
+                                <a title="{{ __('You can not vote for your own answer') }}" class="off cursor-not-allowed">
+                                    <i class="fas fa-caret-down fa-3x"></i>
+                                </a>
+                            @endcannot
+
+                            @can ('mark-best-answer', $answer)
                                 <a title="{{ __('Mark this answer as best answer') }}"
                                     class="mt-3 {{ $answer->status }}"
                                     onclick="event.preventDefault(); document.getElementById('mark-answer-{{ $answer->id }}').submit();">

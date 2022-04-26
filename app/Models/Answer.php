@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Parsedown;
 
 class Answer extends Model
 {
@@ -28,7 +29,10 @@ class Answer extends Model
 
     public function getBodyHtmlAttribute()
     {
-        return \Parsedown::instance()->text($this->body);
+        $parsedown = new Parsedown();
+        $parsedown->setSafeMode(true);
+
+        return Parsedown::instance()->text($this->body);
     }
 
     public function getStatusAttribute()

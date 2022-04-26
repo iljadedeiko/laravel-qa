@@ -98,4 +98,15 @@ form.form-delete {
     width: 50px;
 }
 
+.login-form, .register-form {
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
 
+.questions-block {
+    margin-bottom: 150px;
+}
+
+.vote-controls a.cursor-not-allowed {
+    cursor: not-allowed;
+}
