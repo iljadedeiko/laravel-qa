@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AskQuestionRequest;
+use App\Http\Requests\UpdateQuestionRequest;
 use App\Models\Category;
 use App\Models\Question;
 use Illuminate\Http\Response;
@@ -10,8 +11,8 @@ use Illuminate\Support\Facades\Gate;
 
 class QuestionsController extends Controller
 {
-    public $str = "\Illuminate\Support\Str";
-    public $auth = "\Illuminate\Support\Facades\Auth";
+    private $str = "\Illuminate\Support\Str";
+    private $auth = "\Illuminate\Support\Facades\Auth";
 
     public function __construct()
     {
@@ -98,7 +99,7 @@ class QuestionsController extends Controller
      * @param  \App\Models\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function update(AskQuestionRequest $request, Question $question)
+    public function update(UpdateQuestionRequest $request, Question $question)
     {
         if (Gate::denies('update-question', $question)) {
             abort(403, "Access denied");

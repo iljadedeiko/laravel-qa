@@ -65,7 +65,8 @@ class User extends Authenticatable
         return $this->belongsToMany(Answer::class, 'vote_answers');
     }
 
-    public function getUrlAttribute() {
+    public function getUrlAttribute()
+    {
 //        return route("question.show", $this->id);
         return '#';
     }
@@ -82,14 +83,14 @@ class User extends Authenticatable
     {
         $voteAnswers = $this->voteAnswers();
         if ($voteAnswers->where('answer_id', $answer->id)->exists()) {
-            $voteAnswers->updateExistingPivot($answer, ['votes_sum' => $vote]);
+            $voteAnswers->updateExistingPivot($answer, ['vote_value' => $vote]);
         } else {
-            $voteAnswers->attach($answer, ['votes_sum' => $vote]);
+            $voteAnswers->attach($answer, ['vote_value' => $vote]);
         }
 
         $answer->load('voteAnswers');
-        $votesDown = $answer->voteAnswers()->wherePivot('votes_sum', -1)->sum('votes_sum');
-        $votesUp = $answer->voteAnswers()->wherePivot('votes_sum', 1)->sum('votes_sum');
+        $votesDown = $answer->voteAnswers()->wherePivot('vote_value', -1)->sum('vote_value');
+        $votesUp = $answer->voteAnswers()->wherePivot('vote_value', 1)->sum('vote_value');
         $answer->votes_count = (int)$votesDown + (int)$votesUp;
         $answer->save();
     }
@@ -98,14 +99,14 @@ class User extends Authenticatable
     {
         $voteQuestions = $this->voteQuestions();
         if ($voteQuestions->where('question_id', $question->id)->exists()) {
-            $voteQuestions->updateExistingPivot($question, ['votes_sum' => $vote]);
+            $voteQuestions->updateExistingPivot($question, ['vote_value' => $vote]);
         } else {
-            $voteQuestions->attach($question, ['votes_sum' => $vote]);
+            $voteQuestions->attach($question, ['vote_value' => $vote]);
         }
 
         $question->load('voteQuestions');
-        $votesDown = $question->voteQuestions()->wherePivot('votes_sum', -1)->sum('votes_sum');
-        $votesUp = $question->voteQuestions()->wherePivot('votes_sum', 1)->sum('votes_sum');
+        $votesDown = $question->voteQuestions()->wherePivot('vote_value', -1)->sum('vote_value');
+        $votesUp = $question->voteQuestions()->wherePivot('vote_value', 1)->sum('vote_value');
         $question->votes_count = (int)$votesDown + (int)$votesUp;
         $question->save();
     }

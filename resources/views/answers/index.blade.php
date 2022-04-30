@@ -14,10 +14,10 @@
                         <div class="d-flex flex-column vote-controls">
 
                             @cannot ('vote-own-answer', $answer)
-                                <a title="{{ __('Mark this question as useful') }}"
+                                <a title="{{ __('Mark this answer as useful') }}"
                                    class="vote-up {{ $auth::guest() ? 'off' : '' }}
                                    {{ ($question->user->id == $auth::id()) ? 'off' : '' }}"
-                                   onclick="event.preventDefault(); document.getElementById( 'vote-up-answer-{{ $answer->id }}').submit();">
+                                   onclick="event.preventDefault(); document.getElementById( 'vote-up-answer-{{ $answer->id }}' ).submit();">
                                     <i class="fas fa-caret-up fa-3x"></i>
                                 </a>
 
@@ -28,7 +28,7 @@
 
                                 <span class="votes-count">{{ $answer->votes_count }}</span>
 
-                                <a title="{{ __('Mark this question as not useful') }}"
+                                <a title="{{ __('Mark this answer as not useful') }}"
                                    class="vote-down {{ $auth::guest() ? 'off' : '' }}
                                    {{ ($answer->user->id == $auth::id()) ? 'off' : '' }}"
                                    onclick="event.preventDefault(); document.getElementById('vote-down-answer-{{ $answer->id }}').submit();">
@@ -62,7 +62,7 @@
                                 </form>
                             @else
                                 @if ($answer->best_answer)
-                                    <a title="{{ __('The question author marked this answer as best answer') }}" class="mt-3 {{ $answer->status }}">
+                                    <a title="{{ __('This answer is marked by the author as the best') }}" class="mt-3 {{ $answer->status }}">
                                        <i class="fa fa-plus fa-2x"></i>
                                     </a>
                                 @endif
@@ -82,8 +82,10 @@
                                     </div>
                                 </div>
                             </div>
-                            {!! $answer->body_html !!}
-                            <div class="row">
+
+                            <div class="answer-text pr-5 mb-3">{!! $answer->body_html !!}</div>
+
+                            <div class="row mb-2">
                                 <div class="col-4">
                                     <div class="ml-auto">
                                         @can('update-answer', $answer)

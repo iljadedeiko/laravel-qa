@@ -41,8 +41,11 @@
 
                                 <div class="media-body">
                                     <div class="d-flex align-items-center">
-                                        <h3 class="mt-0"><a href="{{ $question->url }}">{{ $question->title }}</a></h3>
-                                        <div class="ml-auto">
+                                        <h3 class="mt-0
+                                            {{ (!empty($question->category->category_name) || Auth::id() == $question->user_id) ? 'col-10' : 'col-12 pr-5' }}">
+                                            <a href="{{ $question->url }}">{{ $question->title }}</a>
+                                        </h3>
+                                        <div class="ml-auto col-2">
                                             @if (!empty($question->category->category_name))
                                                 <h4 class="text-primary font-weight-bold">{{ $question->category->category_name }}</h4>
                                             @endif
@@ -52,22 +55,27 @@
                                             @endcan
 
                                             @can('delete-question', $question)
-                                                <form class="form-delete" action="{{ route('questions.destroy', $question->id) }}" method="post">
+                                                <form class="form-delete" action="{{ route('questions.destroy', $question->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
 
-                                                    <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('{{ __('Are you sure?') }}')">{{ __('Delete') }}</button>
+                                                    <button type="submit" class="btn btn-sm btn-outline-danger"
+                                                        onclick="return confirm('{{ __('Are you sure?') }}')">
+                                                        {{ __('Delete') }}
+                                                    </button>
                                                 </form>
                                             @endcan
                                         </div>
                                     </div>
 
-                                    <p class="lead">
+                                    <p class="lead col-10">
                                         {{ __('Asked By') }}
                                         <a href="{{ $question->user->url }}">{{ $question->user->name }}</a>
                                         <small class="text-muted">{{ $question->created_date }}</small>
                                     </p>
-                                    {{ $str::limit($question->body, 250) }}
+                                    <p class="{{ (!empty($question->category->category_name) || Auth::id() == $question->user_id) ? 'col-10' : 'col-12 pr-5' }}">
+                                        {{ $str::limit($question->body, 250) }}
+                                    </p>
                                 </div>
                             </div>
                             <hr>

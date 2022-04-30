@@ -27,6 +27,5 @@
                 return this.categories.filter((item) => item.category_id === this.selectedCategory);
             }
         }
-
     }
 </script>

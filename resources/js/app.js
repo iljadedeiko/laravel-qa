@@ -43,3 +43,11 @@ const questions = new Vue({
 const categories = new Vue({
     el: '#categories',
 })
+
+$(document).ready(function () {
+    setTimeout(function() {
+        $('#alertMessage').fadeOut('slow',function() {
+            $('#alertMessage').remove();
+        });
+    }, 2000);
+});

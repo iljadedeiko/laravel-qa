@@ -9,15 +9,24 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <a class="navbar-brand text-white font-bold home-button" href="{{ route('questions.index') }}">
+                    {{ __('All Questions') }}
+                </a>
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav me-auto">
 
                 </ul>
-
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
                     <!-- Authentication Links -->
-                    @guest
+                    @if (Auth::check())
+                        <a class="d-flex" href="{{ route('favorites.index', Auth::user()) }}">
+                            <button type="button" class="btn btn-outline-light mr-4">{{ __('My Favorites') }}</button>
+                        </a>
+                    @endif
+
+                        @guest
                         @if (Route::has('login'))
                             <li class="nav-item">
                                 <a class="nav-link h4 text-white" href="{{ route('login') }}">{{ __('Login') }}</a>

@@ -11,8 +11,8 @@
                             @if (!empty($question->category->category_name))
                                 <h3 class="mr-3 text-primary font-weight-bold">{{ $question->category->category_name }}</h3>
                             @endif
-                            <h1>{{ $question->title }}</h1>
-                            <div class="ml-auto">
+                            <h1 class="col-9 question-title">{{ $question->title }}</h1>
+                            <div class="{{ empty($question->category->category_name) ? 'col-3 back-home' : '' }}">
                                 <a href="{{ route('questions.index') }}" class="btn btn-outline-secondary">{{ __('Back to all questions') }}</a>
                             </div>
                         </div>
@@ -76,7 +76,7 @@
                         </div>
 
                         <div class="media-body">
-                            {!! $question->body_html !!}
+                            <div class="question-text pr-5 mb-3">{!! $question->body_html !!}</div>
                             <div class="float-right">
                                 <div class="text-muted">{{ __('Asked') }} {{ $question->created_at->format("M d,Y") }} {{ __('at') }} {{ $question->created_at->format("H:i") }}</div>
                                 <div class="media mt-1">

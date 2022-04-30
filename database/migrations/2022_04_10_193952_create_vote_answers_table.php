@@ -17,7 +17,7 @@ class CreateVoteAnswersTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('answer_id');
-            $table->tinyInteger('votes_sum')->default(0);
+            $table->tinyInteger('vote_value')->default(0);
             $table->unique(['user_id', 'answer_id']);
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('CASCADE');

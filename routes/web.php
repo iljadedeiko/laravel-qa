@@ -30,10 +30,6 @@ use Illuminate\Support\Facades\Route;
 //    'middleware' => 'setLocale',
 //], function() {
 
-    Route::get('/', function () {
-        return view('home');
-    });
-
     Auth::routes();
 
     //question routes
@@ -63,9 +59,11 @@ use Illuminate\Support\Facades\Route;
     Route::post('/answers/{answer}/mark', ['middleware' => 'auth', 'uses' => MarkAnswerController::class])->name('answers.mark');
 
     //favorites routes
-    Route::delete('/questions/{question}/favorites', [FavoritesController::class, 'destroy'])->name('questions.unfavorite');
+    Route::get('/questions/favorites/{user}', [FavoritesController::class, 'index'])->name('favorites.index');
 
     Route::post('/questions/{question}/favorites', [FavoritesController::class, 'store'])->name('questions.favorite');
+
+    Route::delete('/questions/{question}/favorites', [FavoritesController::class, 'destroy'])->name('questions.unfavorite');
 
     //vote answer route
     Route::post('/answers/{answer}/vote-answer', ['middleware' => 'auth', 'uses' => VoteAnswerController::class]);

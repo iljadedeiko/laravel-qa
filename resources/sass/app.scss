@@ -8,7 +8,7 @@
 @import '~bootstrap/scss/bootstrap';
 
 .counters {
-    margin-right: 30px;
+    margin-right: 20px;
     font-size: 10px;
     text-align: center;
 
@@ -109,4 +109,19 @@ form.form-delete {
 
 .vote-controls a.cursor-not-allowed {
     cursor: not-allowed;
+}
+
+.my-favorites {
+    margin-left: 40px;
+}
+
+.home-button {
+    font-size: 20px;
+    margin-left: 3rem;
+}
+
+.back-home {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

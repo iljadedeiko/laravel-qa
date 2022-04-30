@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Question;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class VoteQuestionController extends Controller
@@ -12,7 +13,7 @@ class VoteQuestionController extends Controller
         $this->middleware('auth');
     }
 
-    public function __invoke(Question $question)
+    public function __invoke(Question $question, User $user)
     {
         $voteQuestion = (int)request()->vote_question;
         Auth::user()->voteQuestion($question, $voteQuestion);
