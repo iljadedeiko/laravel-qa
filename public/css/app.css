@@ -10120,3 +10120,27 @@ form.form-delete {
   align-items: center;
   justify-content: center;
 }
+
+.favorite-media-block {
+  position: relative;
+}
+
+.remove-favorite {
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.remove-favorite-hidden {
+  display: none;
+}
+
+.remove-favorite:hover .remove-favorite-hidden {
+  display: block;
+}
+
+.remove-favorite:hover .remove-favorite-visible {
+  display: none;
+}

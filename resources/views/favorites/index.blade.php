@@ -26,14 +26,28 @@
                         @include('layouts.messages')
 
                         @foreach($userFavQuestions as $favQuestion)
-                            <div class="media">
+                            <div class="media favorite-media-block">
+                                <a title="{{ __('Remove this question from favorites') }}"
+                                   class="remove-favorite {{ $favQuestion->favorite_question ? 'favorited' : '' }}"
+                                   onclick="event.preventDefault(); document.getElementById('favorite-question-{{ $favQuestion->id }}').submit();">
+                                    <img class="remove-favorite-visible" src="{{ asset('images/delete-button-black-30.svg') }}" alt="Remove from favorites button">
+                                    <img class="remove-favorite-hidden" src="{{ asset('images/delete-button-white-30.svg') }}" alt="Remove from favorites button">
+                                </a>
+
+                                <form method="POST" class="favorite-question" action="/questions/{{ $favQuestion->id }}/favorites" id="favorite-question-{{ $favQuestion->id }}">
+                                    @csrf
+                                    @if ($favQuestion->favorite_question)
+                                        @method ('DELETE')
+                                    @endif
+                                </form>
+
                                 <div class="d-flex flex-column counters">
                                     <div class="vote">
                                         <strong>{{ $favQuestion->votes_count }}</strong> {{ $str::plural('vote', $favQuestion->votes_count) }}
                                     </div>
-{{--                                    <div class="status {{ $statusAttribute->status }}">--}}
+                                    <div class="status {{ $favQuestion->status }}">
                                         <strong>{{ $favQuestion->answers_count }}</strong> {{ $str::plural('answer', $favQuestion->answers_count) }}
-{{--                                    </div>--}}
+                                    </div>
                                     <div class="view">
                                         {{ $favQuestion->views . " " . $str::plural('view', $favQuestion->views) }}
                                     </div>
@@ -49,19 +63,6 @@
                                             @if (!empty($favQuestion->category->category_name))
                                                 <h4 class="text-primary font-weight-bold">{{ $favQuestion->category->category_name }}</h4>
                                             @endif
-
-                                            @can('update-question', $favQuestion)
-                                                <a href="{{ route('questions.edit', $favQuestion->id) }}" class="btn btn-sm btn-outline-info">{{ __('Edit') }}</a>
-                                            @endcan
-
-                                            @can('delete-question', $favQuestion)
-                                                <form class="form-delete" action="{{ route('questions.destroy', $favQuestion->id) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-
-                                                    <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('{{ __('Are you sure?') }}')">{{ __('Delete') }}</button>
-                                                </form>
-                                            @endcan
                                         </div>
                                     </div>
 

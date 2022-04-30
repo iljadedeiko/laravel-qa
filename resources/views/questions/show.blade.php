@@ -60,8 +60,7 @@
                             @endcannot
 
                             <a title="{{ __('Click to mark as favorite question') }}"
-                               class="favorite mt-3 {{ $auth::guest() ? 'off' : ($question->favorite_question ? 'favorited' : '') }}
-                               {{ ($question->user->id == $auth::id()) ? 'off' : '' }}"
+                               class="favorite mt-3 {{ $auth::guest() ? 'off' : ($question->favorite_question ? 'favorited' : '') }}"
                                onclick="event.preventDefault(); document.getElementById('favorite-question-{{ $question->id }}').submit();">
                                 <i class="fas fa-star fa-2x"></i>
                                 <span class="favorite-count">{{ $question->favorites_count }}</span>
