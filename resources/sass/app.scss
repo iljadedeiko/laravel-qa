@@ -155,7 +155,7 @@ form.form-delete {
     letter-spacing: .2em;
 }
 
-.answers-container {
+.question-show-container {
     margin-bottom: 8rem;
 }
 
@@ -175,3 +175,9 @@ form.form-delete {
     color: #FFC12B;
 }
 
+.answers, .questions {
+    padding: 20px 0;
+    &:not(:last-child) {
+        border-bottom: 1px solid rgba($black, .1);
+    }
+}

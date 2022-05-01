@@ -31,7 +31,7 @@
                             </div>
                         @else
                             @foreach($questions as $question)
-                                <div class="media">
+                                <div class="media questions">
                                     <div class="d-flex flex-column counters">
                                         <div class="vote">
                                             <strong>{{ $question->votes_count }}</strong> {{ $str::plural('vote', $question->votes_count) }}
@@ -83,13 +83,10 @@
                                         </p>
                                     </div>
                                 </div>
-                                <hr>
                             @endforeach
                         @endif
 
-                        <div class="pagination justify-content-center">
-                            {{ $questions->links('pagination::bootstrap-4') }}
-                        </div>
+                        {{ $questions->links('pagination::bootstrap-4') }}
                     </div>
                 </div>
             </div>

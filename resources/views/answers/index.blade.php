@@ -14,7 +14,7 @@
                     @include ('layouts.messages')
 
                     @foreach ($answers as $answer)
-                        <div class="media">
+                        <div class="media answers">
                             <div class="d-flex flex-column vote-controls">
                                 @cannot ('vote-own-answer', $answer)
                                     <a title="{{ __('Mark this answer as useful') }}"
@@ -86,7 +86,7 @@
                                     </div>
                                 </div>
 
-                                <div class="answer-text pr-5 mb-3">{!! $answer->body_html !!}</div>
+                                <div class="answer-text pr-5">{!! $answer->body_html !!}</div>
 
                                 <div class="row mb-2">
                                     <div class="col-4">
@@ -108,7 +108,6 @@
                                 </div>
                             </div>
                         </div>
-                        <hr>
                     @endforeach
                 </div>
             </div>

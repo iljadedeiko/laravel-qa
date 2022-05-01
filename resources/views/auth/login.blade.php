@@ -8,9 +8,8 @@
                 <div class="card-header">{{ __('Sign In') }}</div>
 
                 <div class="card-body d-flex justify-content-center">
-                    <form method="POST" action="{{ route('login') }}">
+                    <form class="col-8" method="POST" action="{{ route('login') }}">
                         @csrf
-
                         <div class="row mb-3">
                             <label for="email" class="col-form-label text-md-end">{{ __('Email Address') }}</label>
                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
