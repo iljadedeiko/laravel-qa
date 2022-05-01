@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\AskQuestionRequest;
-use App\Http\Requests\UpdateQuestionRequest;
-use App\Models\Answer;
+use App\Http\Requests\Question\AskQuestionRequest;
+use App\Http\Requests\Question\UpdateQuestionRequest;
 use App\Models\Category;
 use App\Models\Question;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Gate;
 
 class QuestionsController extends Controller

@@ -41,8 +41,8 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="question-body">{{ __('Your question') }}</label>
-                                <textarea name="body" id="question-body" rows="10" class="form-control {{ $errors->has('body') ? 'is-invalid' : '' }}">{{ old('body', $question->body) }}</textarea>
+                                <label for="question-edit-textarea">{{ __('Your question') }}</label>
+                                <textarea name="body" id="question-edit-textarea" rows="10" class="form-control {{ $errors->has('body') ? 'is-invalid' : '' }}">{{ old('body', $question->body) }}</textarea>
 
                                 @if ($errors->has('body'))
                                     <div class="invalid-feedback">

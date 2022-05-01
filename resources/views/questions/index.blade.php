@@ -27,7 +27,7 @@
 
                         @if (count($questions) < 1)
                             <div class="alert alert-warning">
-                                <strong>{{ __('No questions were found.') }}</strong> {{ __('Create  a new question and it will appear here !') }}
+                                <strong>{{ __('No questions were found.') }}</strong> {{ __('Create a new question and it will appear here !') }}
                             </div>
                         @else
                             @foreach($questions as $question)
@@ -46,8 +46,7 @@
 
                                     <div class="media-body">
                                         <div class="d-flex align-items-center">
-                                            <h3 class="mt-0
-                                                {{ (!empty($question->category->category_name) || Auth::id() == $question->user_id) ? 'col-10' : 'col-12 pr-5' }}">
+                                            <h3 class="mt-0 {{ (!empty($question->category->category_name) || Auth::id() == $question->user_id) ? 'col-10' : 'col-12 pr-5' }}">
                                                 <a href="{{ $question->url }}">{{ $question->title }}</a>
                                             </h3>
                                             <div class="ml-auto col-2">
@@ -78,9 +77,9 @@
                                             <a href="{{ $question->user->url }}">{{ $question->user->name }}</a>
                                             <small class="text-muted">{{ $question->created_date }}</small>
                                         </p>
-                                        <p class="{{ (!empty($question->category->category_name) || Auth::id() == $question->user_id) ? 'col-10' : 'col-12 pr-5' }}">
-                                            {{ $str::limit(strip_tags($question->body_html), 300) }}
-                                        </p>
+                                        <div class="{{ (!empty($question->category->category_name) || Auth::id() == $question->user_id) ? 'col-10' : 'col-12 pr-5' }}">
+                                            {!! $str::limit($question->body_html, 300) !!}
+                                        </div>
                                     </div>
                                 </div>
                             @endforeach
