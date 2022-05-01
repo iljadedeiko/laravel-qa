@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AskQuestionRequest;
 use App\Http\Requests\UpdateQuestionRequest;
+use App\Models\Answer;
 use App\Models\Category;
 use App\Models\Question;
 use Illuminate\Http\Response;
@@ -68,9 +69,9 @@ class QuestionsController extends Controller
      */
     public function show(Question $question)
     {
-        $question->increment('views');
         $str = $this->str;
         $auth = $this->auth;
+        $question->increment('views');
 
         return view('questions.show', compact('question', 'str', 'auth'));
     }

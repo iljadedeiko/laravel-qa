@@ -47,7 +47,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('vote-own-answer', function($user, $answer) {
-            return $user->id === $answer->question->user_id;
+            return $user->id === $answer->user_id;
         });
 
         Gate::define('vote-own-question', function($user, $question) {
