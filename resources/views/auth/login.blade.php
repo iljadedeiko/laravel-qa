@@ -15,11 +15,11 @@
                             <label for="email" class="col-form-label text-md-end">{{ __('Email Address') }}</label>
                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                            @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
 
                         <div class="row mb-1">
@@ -42,9 +42,7 @@
                         </div>
 
                         <div class="row">
-                            <button type="submit" class="btn btn-primary btn-block">
-                                {{ __('Sign In') }}
-                            </button>
+                            <button type="submit" class="btn btn-primary btn-block sign-button text-uppercase font-weight-bold">{{ __('Sign In') }}</button>
                         </div>
 
                         <div class="row mt-2 mb-3 py-0">
@@ -52,7 +50,7 @@
                             <label class="form-check-label" for="remember">{{ __('Remember Me') }}</label>
                         </div>
 
-                        <div class="row">
+                        <div class="row mb-3">
                             <a href="{{ route('register') }}">{{ __('Not registered yet? Register now!') }}</a>
                         </div>
                     </form>

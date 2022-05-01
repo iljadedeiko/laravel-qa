@@ -15,7 +15,8 @@
         "laravel/legacy-factories": "^1.3",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
-        "laravel/ui": "^3.4"
+        "laravel/ui": "^3.4",
+        "mews/purifier": "^3.3"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",

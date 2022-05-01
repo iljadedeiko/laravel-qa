@@ -31,8 +31,9 @@ class Answer extends Model
     {
         $parsedown = new Parsedown();
         $parsedown->setSafeMode(true);
+        $bodyHtml = Parsedown::instance()->text($this->body);
 
-        return Parsedown::instance()->text($this->body);
+        return clean($bodyHtml);
     }
 
     public function getStatusAttribute()

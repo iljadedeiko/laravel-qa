@@ -10144,3 +10144,8 @@ form.form-delete {
 .remove-favorite:hover .remove-favorite-visible {
   display: none;
 }
+
+.sign-button {
+  border-radius: 20px;
+  letter-spacing: 0.2em;
+}

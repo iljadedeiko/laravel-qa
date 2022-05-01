@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="d-flex align-items-center">
-                            <img class="ml-1" src="{{ asset('images/favorites-30.svg') }}" alt="Favorites questions icon">
+                            <img class="ml-1" src="{{ asset('images/favorites-30.svg') }}" alt="{{ __('Favorites questions icon') }}">
                             <h2 class="mr-auto my-favorites">
                                 {{ __('My Favorites Questions') }}
                             </h2>
@@ -24,6 +24,10 @@
                     </div>
                     <div class="card-body">
                         @include('layouts.messages')
+
+                        @if (count($userFavQuestions) < 1)
+                            <div class="alert alert-primary mx-5 my-5 text-center" role="alert">{{ __("No question has yet been added to favourites. You can add them here by pressing the relevant button on the question page !") }}</div>
+                        @endif
 
                         @foreach($userFavQuestions as $favQuestion)
                             <div class="media favorite-media-block">

@@ -74,7 +74,7 @@
                                         <small class="text-muted">{{ $question->created_date }}</small>
                                     </p>
                                     <p class="{{ (!empty($question->category->category_name) || Auth::id() == $question->user_id) ? 'col-10' : 'col-12 pr-5' }}">
-                                        {{ $str::limit($question->body, 250) }}
+                                        {{ $str::limit(strip_tags($question->body_html), 300) }}
                                     </p>
                                 </div>
                             </div>

@@ -41,6 +41,6 @@ class FavoritesController extends Controller
     public function destroy(Question $question)
     {
         $question->favorites()->detach(Auth::id());
-        return back();
+        return back()->with('success', __('The question has been removed from the favorites'));
     }
 }
