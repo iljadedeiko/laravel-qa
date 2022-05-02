@@ -20,7 +20,7 @@
                             @method('PUT')
 
                             <div class="form-group">
-                                <label for="question-title">{{ __('Question Title') }}</label>
+                                <label class="h5" for="question-title">{{ __('Question Title') }}</label>
                                 <input type="text" name="title" value="{{ old('title', $question->title) }}" id="question-title" class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}">
 
                                 @if ($errors->has('title'))
@@ -41,8 +41,10 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="question-edit-textarea">{{ __('Your question') }}</label>
-                                <textarea name="body" id="question-edit-textarea" rows="10" class="form-control {{ $errors->has('body') ? 'is-invalid' : '' }}">{{ old('body', $question->body) }}</textarea>
+                                <label class="h5" for="question-edit-textarea">{{ __('Your question') }}</label>
+                                @include ('questions.textEditor', [
+                                    'question' => $question
+                                ])
 
                                 @if ($errors->has('body'))
                                     <div class="invalid-feedback">

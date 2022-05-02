@@ -15,7 +15,10 @@
                         @method('PUT')
 
                         <div class="form-group">
-                            <textarea name="body" id="answer_edit_textarea" class="form-control {{ $errors->has('body') ? 'is-invalid' : '' }}" rows="7">{{ old('body', $answer->body) }}</textarea>
+                            @include ('answers.textEditor', [
+                            'answer' => $answer
+                            ])
+
                             @if ($errors->has('body'))
                                 <div class="invalid-feedback">
                                     <strong>{{ $errors->first('body') }}</strong>

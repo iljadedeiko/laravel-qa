@@ -75,9 +75,9 @@
                                         <a href="{{ $favQuestion->user->url }}">{{ $favQuestion->user->name }}</a>
                                         <small class="text-muted">{{ $favQuestion->created_date }}</small>
                                     </p>
-                                    <p class="{{ (!empty($favQuestion->category->category_name) || Auth::id() == $favQuestion->user_id) ? 'col-10' : 'col-12 pr-5' }}">
-                                        {{ $str::limit($favQuestion->body, 250) }}
-                                    </p>
+                                    <div class="{{ (!empty($favQuestion->category->category_name) || Auth::id() == $favQuestion->user_id) ? 'col-10' : 'col-12 pr-5' }}">
+                                        {!! $str::limit($favQuestion->body_html, 300) !!}
+                                    </div>
                                 </div>
                             </div>
                             <hr>

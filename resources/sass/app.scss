@@ -7,7 +7,11 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
-li, p {
+body {
+    background: #F7F7F7;
+}
+
+li, p, input {
     font-family: "Helvetica Neue", sans-serif;
     font-size: 14px;
 }
@@ -189,4 +193,9 @@ form.form-delete {
     &:not(:last-child) {
         border-bottom: 1px solid rgba($black, .1);
     }
+}
+
+.invalid-feedback {
+    font-size: 100%;
+    text-align: left!important;
 }

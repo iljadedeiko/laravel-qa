@@ -42,7 +42,7 @@ const questions = new Vue({
 
 const categories = new Vue({
     el: '#categories',
-})
+});
 
 $(document).ready(function () {
     setTimeout(function() {
@@ -52,7 +52,7 @@ $(document).ready(function () {
     }, 2000);
 
     tinymce.init({
-        selector: '#answer_edit_textarea, #answer_create_textarea, #question-create-textarea, #question-edit-textarea',
+        selector: '#question_textarea, #answer_textarea',
         menubar: false,
         plugins: [
             'advlist autolink lists link image charmap print preview anchor',

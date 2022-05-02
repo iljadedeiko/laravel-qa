@@ -7,8 +7,10 @@
             <div class="card-body">
                 <form action="{{ route('questions.answers.store', $question->id) }}" method="POST">
                     @csrf
+
                     <div class="form-group">
-                        <textarea name="body" id="answer_create_textarea" class="form-control {{ $errors->has('body') ? 'is-invalid' : '' }}" rows="7">{{ old('body') }}</textarea>
+                        @include ('answers.textEditor')
+
                         @if ($errors->has('body'))
                             <div class="invalid-feedback">
                                 <strong>{{ $errors->first('body') }}</strong>
