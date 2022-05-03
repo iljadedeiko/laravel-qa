@@ -12,7 +12,7 @@
     <div class="card-body tab-content">
         @if (isset($answer))
             <div class="tab-pane active" id="write-tab">
-                <textarea name="body" id="answer_textarea" class="form-control {{ $errors->has('body') ? 'is-invalid' : '' }}" rows="7">{{ old('body', $answer->body) }}</textarea>
+                <textarea name="body" id="answer_textarea" class="form-control {{ $errors->has('body') ? 'is-invalid' : '' }}" rows="10">{{ old('body', $answer->body) }}</textarea>
                 @if ($errors->has('body'))
                     <div class="invalid-feedback">
                         <strong>{{ $errors->first('body') }}</strong>
@@ -21,7 +21,7 @@
             </div>
         @else
             <div class="tab-pane active" id="write-tab">
-                <textarea name="body" id="answer_edit_textarea" class="form-control {{ $errors->has('body') ? 'is-invalid' : '' }}" rows="7">{{ old('body') }}</textarea>
+                <textarea name="body" id="answer_textarea" class="form-control {{ $errors->has('body') ? 'is-invalid' : '' }}" rows="10">{{ old('body') }}</textarea>
                 @if ($errors->has('body'))
                     <div class="invalid-feedback">
                         <strong>{{ $errors->first('body') }}</strong>

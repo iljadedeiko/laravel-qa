@@ -1,8 +1,9 @@
 <?php
 
 use App\Http\Controllers\AnswersController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\FavoritesController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MarkAnswerController;
 use App\Http\Controllers\QuestionsController;
 use App\Http\Controllers\VoteAnswerController;
@@ -14,11 +15,6 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
 */
 //Route::get('/', function () {
 //    return redirect(app()->getLocale());
@@ -31,6 +27,15 @@ use Illuminate\Support\Facades\Route;
 //], function() {
 
     Auth::routes();
+
+    //reset password routes
+    Route::get('forgot-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forgot.password.index');
+
+    Route::post('forgot-password', [ForgotPasswordController::class, 'submitForgetPasswordForm'])->name('forgot.password.store');
+
+    Route::get('reset-password/{token}', [ResetPasswordController::class, 'showResetPasswordForm'])->name('reset.password.show');
+
+    Route::post('reset-password', [ResetPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.store');
 
     //question routes
     Route::get('/', [QuestionsController::class, 'index'])->name('questions.index');

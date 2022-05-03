@@ -46,10 +46,16 @@ const categories = new Vue({
 
 $(document).ready(function () {
     setTimeout(function() {
-        $('#alertMessage').fadeOut('slow',function() {
+        $('#alert_message, #forgot_password').fadeOut('slow',function() {
             $('#alertMessage').remove();
         });
     }, 2000);
+
+    setTimeout(function() {
+        $('#invalid_token').fadeOut('slow',function() {
+            $('#alertMessage').remove();
+        });
+    }, 6000);
 
     tinymce.init({
         selector: '#question_textarea, #answer_textarea',

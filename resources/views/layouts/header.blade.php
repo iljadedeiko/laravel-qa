@@ -29,7 +29,7 @@
                         @guest
                         @if (Route::has('login'))
                             <li class="nav-item">
-                                <a class="nav-link h4 text-white mr-2" href="{{ route('login') }}">
+                                <a class="nav-link h5 text-white mr-2 user-actions" href="{{ route('login') }}">
                                     {{ __('Sign In') }}
                                 </a>
                             </li>
@@ -37,7 +37,7 @@
 
                         @if (Route::has('register'))
                             <li class="nav-item">
-                                <a class="nav-link h4 text-white" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                <a class="nav-link h5 text-white user-actions" href="{{ route('register') }}">{{ __('Register') }}</a>
                             </li>
                         @endif
                     @else

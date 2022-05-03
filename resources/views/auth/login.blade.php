@@ -7,9 +7,16 @@
             <div class="card">
                 <div class="card-header">{{ __('Sign In') }}</div>
 
+                @if(session('message'))
+                    <div class="alert alert-success text-center m-4" id="forgot_password" role="alert">
+                        {{ session('message') }}
+                    </div>
+                @endif
+
                 <div class="card-body d-flex justify-content-center">
                     <form class="col-8" method="POST" action="{{ route('login') }}">
                         @csrf
+
                         <div class="row mb-3">
                             <label for="email" class="col-form-label text-md-end">{{ __('Email Address') }}</label>
                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
@@ -34,7 +41,7 @@
 
                         <div class="row mb-4">
                             @if (Route::has('password.request'))
-                                <a class="btn btn-link float-right p-0" href="{{ route('password.request') }}">
+                                <a class="btn btn-link float-right p-0" href="{{ route('forgot.password.index') }}">
                                     {{ __('Forgot Your Password?') }}
                                 </a>
                             @endif
