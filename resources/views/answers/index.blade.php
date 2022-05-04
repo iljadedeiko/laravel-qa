@@ -11,9 +11,11 @@
                         <h2>{{ $answersCount . ' ' . __('answer(-s)')}}</h2>
                     </div>
                     <hr>
-                    @include ('layouts.messages')
+                    @include('layouts.messages')
 
                     @foreach ($answers as $answer)
+                        @include('answers.deleteModal')
+
                         <div class="media answers">
                             <div class="d-flex flex-column vote-controls">
                                 @cannot ('vote-own-answer', $answer)
@@ -54,7 +56,7 @@
                                     </a>
                                 @endcannot
 
-                                @can ('mark-best-answer', $answer)
+                                @can('mark-best-answer', $answer)
                                     <a title="{{ __('Mark this answer as best answer') }}"
                                         class="mt-3 mark-best-answer {{ $answer->status }}"
                                         onclick="event.preventDefault(); document.getElementById('mark-answer-{{ $answer->id }}').submit();">
@@ -96,12 +98,11 @@
                                             @endcan
 
                                             @can('delete-answer', $answer)
-                                                <form method="POST" class="form-delete" action="{{ route('questions.answers.destroy', [$question->id, $answer->id]) }}">
-                                                    @method('DELETE')
-                                                    @csrf
-
-                                                    <button type="submit" class="btn btn-sm btn-outline-danger ml-1" onclick="return confirm('{{ __('Are you sure?') }}')">{{ __('Delete') }}</button>
-                                                </form>
+                                                <a href="#deleteModal" data-toggle="modal">
+                                                    <button type="submit" class="btn btn-sm btn-outline-danger ml-1">
+                                                        {{ __('Delete') }}
+                                                    </button>
+                                                </a>
                                             @endcan
                                         </div>
                                     </div>
