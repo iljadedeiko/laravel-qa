@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Notifications\PasswordReset;
 
 class User extends Authenticatable
 {
@@ -109,5 +110,10 @@ class User extends Authenticatable
         $votesUp = $question->voteQuestions()->wherePivot('vote_value', 1)->sum('vote_value');
         $question->votes_count = (int)$votesDown + (int)$votesUp;
         $question->save();
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new PasswordReset($token));
     }
 }

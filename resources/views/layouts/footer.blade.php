@@ -1,12 +1,14 @@
 <footer class="text-center text-lg-start bg-light text-muted">
-
     <hr>
-    <section class="">
+    <section class="panel-footer">
         <div class="container text-center text-md-start mt-5">
             <div class="row mt-3">
                 <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
                     <h6 class="text-uppercase fw-bold mb-4">
-                        <i class="fas fa-gem me-3"></i>Q&A Website For Developers
+                        <a class="text-muted text-decoration-none" href="{{ route('login') }}">
+                            <i class="fas fa-gem me-3"></i>
+                            {{ __('AskDeveloper') }}
+                        </a>
                     </h6>
                     <p>
                         Here you can use rows and columns to organize your footer content. Lorem ipsum
@@ -64,6 +66,6 @@
     </section>
     <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
         © 2022 Copyright:
-        <a class="text-reset fw-bold" href="#">Q&A Website For Developers</a>
+        <a class="text-reset fw-bold" href="#">{{ __('AskDeveloper') }}</a>
     </div>
 </footer>
