@@ -75,14 +75,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Answer::class, 'vote_answers');
     }
 
-    public function getUrlAttribute()
-    {
-        return '#';
-    }
-
     public function getAvatarAttribute()
     {
-        return $this->avatar ?? 'images/avatar-default.png';
+        return isset($this->attributes['avatar'])
+            ? 'images/'.$this->attributes['avatar']
+            : 'images/avatar-default.png';
     }
 
     public function voteAnswer(Answer $answer, $vote)

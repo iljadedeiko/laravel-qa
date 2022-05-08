@@ -43,7 +43,7 @@
                     @else
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle h5 text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                <img src="{{ asset(Auth::user()->avatar) }}" alt="User avatar" class="user-avatar-mini">
+                                <img src="{{ asset(Auth::user()->avatar) }}" alt="User avatar" class="user-avatar-mini user-avatar">
                                 {{ Auth::user()->name }}
                             </a>
 

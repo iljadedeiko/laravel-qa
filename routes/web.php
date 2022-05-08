@@ -81,4 +81,6 @@ use Illuminate\Support\Facades\Route;
     Route::get('/user/{user}/profile', [UserProfileController::class, 'show'])->name('user.profile.index');
 
     Route::get('/user/{user}/profile/edit', [UserProfileController::class, 'edit'])->name('user.profile.edit');
+
+    Route::delete('/user/{user}/profile/delete', [UserProfileController::class, 'destroy'])->name('user.profile.destroy');
 //});

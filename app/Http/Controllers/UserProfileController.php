@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Profile\UserProfileUpdateRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
 class UserProfileController extends Controller
@@ -11,27 +11,6 @@ class UserProfileController extends Controller
     public function __construct()
     {
         $this->middleware('auth', ['except' => ['show']]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
     }
 
     /**
@@ -67,9 +46,15 @@ class UserProfileController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(UserProfileUpdateRequest $request, User $user)
     {
-        //
+        if (Gate::denies('update-profile', $user)) {
+            abort(403, "Access denied");
+        }
+        $user->update($request->all());
+
+        return redirect()->route('profile.show', $user->id)->with('success',
+            __('Your profile has been updated'));
     }
 
     /**
@@ -80,6 +65,11 @@ class UserProfileController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        if (Gate::denies('delete-profile', $user)) {
+            abort(403, "Access denied");
+        }
+        $user->delete();
+
+        return redirect()->route('questions.index')->with('warning', __('Your user account was deleted'));
     }
 }

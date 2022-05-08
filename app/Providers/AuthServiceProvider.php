@@ -6,7 +6,6 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
-
 class AuthServiceProvider extends ServiceProvider
 {
     /**
@@ -55,8 +54,12 @@ class AuthServiceProvider extends ServiceProvider
             return $user->id === $question->user_id;
         });
 
-        Gate::define('update-profile', function($user) {
-            return $user->id === Auth::id();
+        Gate::define('update-profile', function($user, $profileUserId) {
+            return $user->id === $profileUserId->id;
+        });
+
+        Gate::define('delete-profile', function($user, $profileUserId) {
+            return $user->id === $profileUserId->id;
         });
     }
 }

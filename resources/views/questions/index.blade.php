@@ -24,7 +24,8 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    @include('layouts.messages')
+                    @include('layouts.successMessage')
+                    @include('layouts.warningMessage')
 
                     @if (count($questions) < 1)
                         <div class="alert alert-warning">

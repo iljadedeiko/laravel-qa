@@ -23,7 +23,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        @include('layouts.messages')
+                        @include('layouts.successMessage')
 
                         @if (count($userFavQuestions) < 1)
                             <div class="alert alert-primary mx-5 my-5 text-center" role="alert">{{ __("No question has yet been added to favourites. You can add them here by pressing the relevant button on the question page !") }}</div>

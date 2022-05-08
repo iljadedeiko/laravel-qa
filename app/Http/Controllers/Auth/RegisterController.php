@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -55,17 +58,47 @@ class RegisterController extends Controller
         ]);
     }
 
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        /** Make avatar */
+
+        $path = 'images/';
+        $fontPath = public_path('fonts/Oliciy.ttf');
+        $char = strtoupper($request->name[0]);
+        $newAvatarName = rand(12, 83).time().'_avatar.png';
+        $dest = $path.$newAvatarName;
+
+        $createAvatar = makeAvatar($fontPath, $dest, $char);
+        $picture = $createAvatar == true ? $newAvatarName : '';
+
+        event(new Registered($user = $this->create($request->all(), $picture)));
+        $user->save();
+
+        $this->guard()->login($user);
+
+        if ($response = $this->registered($request, $user)) {
+            return $response;
+        }
+
+        return $request->wantsJson()
+            ? new JsonResponse([], 201)
+            : redirect($this->redirectPath());
+    }
+
     /**
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
      * @return \App\Models\User
      */
-    protected function create(array $data)
+    protected function create(array $data, $picture)
     {
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'avatar' => $picture,
             'password' => Hash::make($data['password']),
         ]);
     }

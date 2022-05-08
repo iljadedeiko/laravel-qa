@@ -11,7 +11,7 @@
                         <h2>{{ $answersCount . ' ' . __('answer(-s)')}}</h2>
                     </div>
                     <hr>
-                    @include('layouts.messages')
+                    @include('layouts.successMessage')
 
                     @foreach ($answers as $answer)
                         @include('answers.deleteModal')

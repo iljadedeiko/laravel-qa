@@ -2,13 +2,15 @@
 
 @section('content')
 <div class="container emp-profile">
+    @include('layouts.successMessage')
+
     <div class="row">
         <div class="col-md-4">
             <div class="profile-img">
-                <img src="{{ asset($user->avatar) }}" alt=""/>
-                <div class="file btn btn-lg btn-primary">
-                    Change Photo
-                    <input type="file" name="file"/>
+                <img src="{{ asset($user->avatar) }}" alt="{{ __('User Avatar') }}" class="user-avatar"/>
+                <div class="file btn btn-lg btn-primary user-avatar-change">
+                    {{ __('Change Photo') }}
+                    <input type="file" name="file">
                 </div>
             </div>
         </div>
@@ -27,14 +29,21 @@
                 </ul>
             </div>
         </div>
-{{--        @can('update-profile', $user)--}}
-        @if (Auth::id() === $user->id)
-            <div class="col-md-2">
-                <a href="{{ route('user.profile.edit', $user->id) }}">
-                    <button class="profile-edit-btn">{{ __('Edit Profile') }}</button>
+        <div class="col-md-2">
+            @include('profile.deleteModal')
+
+            @can('update-profile', $user)
+                <a href="{{ route('user.profile.edit', $user->id) }}" class="text-decoration-none">
+                    <button class="btn btn-primary btn-block profile-btn">{{ __('Edit Profile') }}</button>
                 </a>
-            </div>
-        @endif
+            @endcan
+
+            @can('delete-profile', $user)
+                <a href="#deleteModal" data-toggle="modal" class="text-decoration-none">
+                    <button class="btn btn-danger btn-block profile-btn mt-3">{{ __('Delete Profile') }}</button>
+                </a>
+            @endcan
+        </div>
     </div>
     <div class="row">
         <div class="col-md-4">
