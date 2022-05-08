@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\FavoritesController;
 use App\Http\Controllers\MarkAnswerController;
 use App\Http\Controllers\QuestionsController;
+use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\VoteAnswerController;
 use App\Http\Controllers\VoteQuestionController;
 use Illuminate\Support\Facades\Auth;
@@ -76,4 +77,8 @@ use Illuminate\Support\Facades\Route;
     //vote question route
     Route::post('/questions/{question}/vote-question', ['middleware' => 'auth', 'uses' => VoteQuestionController::class]);
 
+    //user profile route
+    Route::get('/user/{user}/profile', [UserProfileController::class, 'show'])->name('user.profile.index');
+
+    Route::get('/user/{user}/profile/edit', [UserProfileController::class, 'edit'])->name('user.profile.edit');
 //});

@@ -26,7 +26,8 @@ class CreateQuestionsTable extends Migration
             $table->unsignedInteger('best_answer_id')->nullable();
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('CASCADE');
+            $table->foreign('user_id')->references('id')->on('users')
+                ->onDelete('CASCADE');
             $table->foreign('category_id')->references('id')->on('categories')
                 ->onDelete('SET NULL')->onUpdate('SET NULL');
         });

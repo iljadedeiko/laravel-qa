@@ -58,6 +58,10 @@ class Question extends Model
     public function markBestAnswer(Answer $answer)
     {
         $this->best_answer_id = $answer->id;
+        $user = $answer->user;
+        $user->rating += 100;
+
+        $user->save();
         $this->save();
     }
 

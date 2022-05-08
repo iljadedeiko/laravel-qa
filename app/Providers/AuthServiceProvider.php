@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
 
@@ -52,6 +53,10 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('vote-own-question', function($user, $question) {
             return $user->id === $question->user_id;
+        });
+
+        Gate::define('update-profile', function($user) {
+            return $user->id === $this->authUser;
         });
     }
 }

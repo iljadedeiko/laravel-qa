@@ -21,6 +21,15 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'user_id',
+        'mobile_number',
+        'avatar',
+        'address_line1',
+        'address_line2',
+        'city',
+        'country',
+        'github_link',
+        'about'
     ];
 
     /**
@@ -68,16 +77,12 @@ class User extends Authenticatable
 
     public function getUrlAttribute()
     {
-//        return route("question.show", $this->id);
         return '#';
     }
 
     public function getAvatarAttribute()
     {
-        $email = $this->email;
-        $size = 32;
-
-        return "https://www.gravatar.com/avatar/" . md5(strtolower(trim($email))) . "?s=" . $size;
+        return $this->avatar ?? 'images/avatar-default.png';
     }
 
     public function voteAnswer(Answer $answer, $vote)

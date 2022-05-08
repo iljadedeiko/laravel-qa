@@ -74,7 +74,7 @@
 
                                     <p class="lead col-10">
                                         {{ __('Asked By') }}
-                                        <a href="{{ $question->user->url }}">{{ $question->user->name }}</a>
+                                        <a href="{{ route('user.profile.index', $question->user->id) }}">{{ $question->user->name }}</a>
                                         <small class="text-muted">{{ $question->created_date }}</small>
                                     </p>
                                     <div class="{{ (!empty($question->category->category_name) || Auth::id() == $question->user_id) ? 'col-10' : 'col-12 pr-5' }}">

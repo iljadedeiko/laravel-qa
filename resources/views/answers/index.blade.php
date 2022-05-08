@@ -79,12 +79,12 @@
                                     <div class="text-muted">{{ __('Answered') }} {{ $answer->created_at->format("M d,Y") }}
                                         {{ __('at') }} {{ $question->created_at->format("H:i") }}</div>
                                     <div class="media mt-1">
-                                        <a href="{{ $answer->user->url }}" class="pr-2">
-                                            <img src="{{ $answer->user->avatar }}" alt="">
+                                        <a href="{{ route('user.profile.index', $answer->user->id) }}" class="pr-2 text-decoration-none">
+                                            <div class="media-body mt-1 d-flex align-items-center">
+                                                <img src="{{ asset($answer->user->avatar) }}" alt="User avatar" class="user-avatar user-avatar-mini">
+                                                <span class="ml-2">{{ $answer->user->name }}</span>
+                                            </div>
                                         </a>
-                                        <div class="media-body mt-1">
-                                            <a href="{{ $answer->user->url }}">{{ $answer->user->name }}</a>
-                                        </div>
                                     </div>
                                 </div>
 

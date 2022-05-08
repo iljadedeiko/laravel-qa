@@ -6,6 +6,7 @@ use App\Http\Requests\Question\AskQuestionRequest;
 use App\Http\Requests\Question\UpdateQuestionRequest;
 use App\Models\Category;
 use App\Models\Question;
+use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 
 class QuestionsController extends Controller
