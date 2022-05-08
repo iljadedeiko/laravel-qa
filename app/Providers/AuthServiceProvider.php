@@ -56,7 +56,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('update-profile', function($user) {
-            return $user->id === $this->authUser;
+            return $user->id === Auth::id();
         });
     }
 }
