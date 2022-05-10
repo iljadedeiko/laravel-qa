@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Profile\UserProfileUpdateRequest;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class UserProfileController extends Controller
 {
@@ -53,8 +57,45 @@ class UserProfileController extends Controller
         }
         $user->update($request->all());
 
-        return redirect()->route('profile.show', $user->id)->with('success',
+        return redirect()->route('user.profile.show', $user->id)->with('success',
             __('Your profile has been updated'));
+    }
+
+    public function updateAvatar(Request $request, User $user)
+    {
+        if (Gate::denies('update-profile', $user)) {
+            abort(403, "Access denied");
+        }
+
+        $request->validate([
+            'user_profile_avatar' => 'mimes:png,jpg,jpeg|image',
+        ]);
+
+        $path = '/images';
+        $file = $request->file('user_profile_avatar');
+        if (!isset($file)) {
+            return back()->with('error', __('A new avatar must be selected'));
+        }
+        $new_name = 'AVATAR_'.date('Ymd').uniqid().'.jpg';
+
+        $upload = $file->move(public_path($path), $new_name);
+        if (!$upload) {
+            return back()->with('error', __('Something went wrong, try again'));
+        } else {
+            $oldPicture = $user->getAvatarAttribute();
+
+            if (isset($oldPicture)) {
+                if (File::exists(public_path($oldPicture))) {
+                    File::delete(public_path($oldPicture));
+                }
+            }
+
+            $user->update([
+                'avatar' => $new_name
+            ]);
+
+            return back()->with('success', __('Your profile avatar has been updated successfully'));
+        }
     }
 
     /**

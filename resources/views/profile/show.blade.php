@@ -2,23 +2,38 @@
 
 @section('content')
 <div class="container emp-profile">
-    @include('layouts.successMessage')
+    <div class="mb-5">@include('layouts.successMessage')</div>
+    <div class="mb-5">@include('layouts.errorMessage')</div>
 
     <div class="row">
         <div class="col-md-4">
             <div class="profile-img">
                 <img src="{{ asset($user->avatar) }}" alt="{{ __('User Avatar') }}" class="user-avatar"/>
-                <div class="file btn btn-lg btn-primary user-avatar-change">
-                    {{ __('Change Photo') }}
-                    <input type="file" name="file">
-                </div>
+
+                @can('update-profile', $user)
+                    <form action="{{ route('user.profile.update-avatar', $user->id) }}" enctype="multipart/form-data" method="POST">
+                        @csrf
+                        @method('PUT')
+
+                        <div class="file btn btn-lg btn-primary user-avatar-change">
+                            {{ __('Select new avatar') }}
+                            <input type="file" name="user_profile_avatar" id="user_profile_avatar" class="form-control {{ $errors->has('user_profile_avatar') ? 'is-invalid' : '' }}">
+
+                            @if ($errors->has('user_profile_avatar'))
+                                <div class="invalid-feedback" id="invalid_file_path">
+                                    <strong>{{ $errors->first('user_profile_avatar') }}</strong>
+                                </div>
+                            @endif
+                        </div>
+                    </form>
+                @endcan
             </div>
         </div>
         <div class="col-md-6">
             <div class="profile-head">
-                <h5>{{ $user->name }}</h5>
+                <h3><b>{{ $user->name }}</b></h3>
                 <h6>{{ $user->email }}</h6>
-                <p class="proile-rating">RANKINGS : <span>8/10</span></p>
+                <p class="proile-rating text-uppercase">{{ __('Rating') }}: <span>{{ $user->rating }}</span></p>
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">{{ __('About') }}</a>

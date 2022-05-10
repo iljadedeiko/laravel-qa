@@ -20,7 +20,7 @@
 
                             <div class="form-group">
                                 <label class="h5" for="question-title">{{ __('Question Title') }}</label>
-                                <input type="text" name="title" value="{{ old('title', $question->title) }}" id="question-title" class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}">
+                                <input type="text" name="title" id="question-title" class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}">
 
                                 @if ($errors->has('title'))
                                     <div class="invalid-feedback">

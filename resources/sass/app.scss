@@ -17,7 +17,7 @@ li, p, input {
 }
 
 h1 {
-    font-family: "Roboto", sans-serif;
+    font-family: "Nunito", sans-serif;
 }
 
 .counters {
@@ -214,11 +214,11 @@ form.form-delete {
 }
 
 .user-avatar-mini {
-    width: 35px;
+    width: 40px;
 }
 
 .user-avatar-midi {
-    width: 40px;
+    width: 50px;
 }
 
 /* DELETE CONFIRMATION MODAL START
@@ -337,19 +337,22 @@ form.form-delete {
 */
 
 .emp-profile {
-    padding: 3%;
+    padding: 1% 3% 3% 3%;
     margin-top: 3%;
     margin-bottom: 3%;
     border-radius: 0.5rem;
     background: #fff;
 }
+
 .profile-img {
     text-align: center;
 }
+
 .profile-img img {
     width: 70%;
     height: 100%;
 }
+
 .profile-img .file {
     position: relative;
     overflow: hidden;
@@ -360,6 +363,7 @@ form.form-delete {
     font-size: 15px;
     background: #212529b8;
 }
+
 .profile-img .file input {
     position: absolute;
     opacity: 0;
@@ -369,58 +373,72 @@ form.form-delete {
     height: 100%;
     z-index: 1;
 }
+
 .profile-head h5 {
     color: #333;
 }
+
 .profile-head h6 {
     color: #0062cc;
 }
+
 .profile-btn {
     border-radius: 1.5rem;
 }
+
 .proile-rating {
-    font-size: 12px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    font-weight: bold;
     color: #818182;
     margin-top: 5%;
 }
+
 .proile-rating span {
     color: #495057;
     font-size: 15px;
     font-weight: 600;
 }
+
 .profile-head .nav-tabs {
     margin-bottom:5%;
 }
+
 .profile-head .nav-tabs .nav-link {
     font-weight:600;
     border: none;
 }
+
 .profile-head .nav-tabs .nav-link.active {
     border: none;
     border-bottom:2px solid #0062cc;
 }
+
 .profile-work {
-    padding: 14%;
-    margin-top: -15%;
+    margin-top: 1.5rem;
 }
+
 .profile-work p {
     font-size: 12px;
     color: #818182;
     font-weight: 600;
-    margin-top: 10%;
 }
+
 .profile-work a {
     text-decoration: none;
     color: #495057;
     font-weight: 600;
     font-size: 14px;
 }
+
 .profile-work ul {
     list-style: none;
 }
+
 .profile-tab label {
     font-weight: 600;
 }
+
 .profile-tab p {
     font-weight: 600;
     color: #0062cc;
@@ -440,3 +458,8 @@ form.form-delete {
 /* USER PROFILE ENDS
  * -----------------
 */
+
+.questions-header {
+    margin-bottom: 0;
+}
+

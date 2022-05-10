@@ -8,16 +8,15 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex align-items-center">
-                        <h2 class="mr-auto">{{ __('All Questions') }}</h2>
-{{--                            <div class="dropdown pr-4">--}}
-{{--                                <select class="form-control categories" name="categories" id="categories">--}}
-{{--                                    <option selected>{{ __('All questions') }}</option>--}}
-{{--                                    @foreach ($categories as $category)--}}
-{{--                                        <option value="{{ $category->id }}">{{ $category->category_name }}</option>--}}
-{{--                                    @endforeach--}}
-{{--                                </select>--}}
-{{--                            </div>--}}
-                        <categories :categories="{{$categories}}"></categories>
+                        <h2 class="mr-auto questions-header">{{ __('All Questions') }}</h2>
+                        <div class="dropdown pr-4">
+                            <select class="form-control categories" name="categories" id="categories">
+                                <option selected>{{ __('All questions') }}</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                         <div class="ask-question">
                             <a href="{{ route('questions.create') }}" class="btn btn-outline-secondary">{{ __('Ask Question') }}</a>
                         </div>
@@ -75,7 +74,7 @@
 
                                     <p class="lead col-10">
                                         {{ __('Asked By') }}
-                                        <a href="{{ route('user.profile.index', $question->user->id) }}">{{ $question->user->name }}</a>
+                                        <a href="{{ route('user.profile.show', $question->user->id) }}">{{ $question->user->name }}</a>
                                         <small class="text-muted">{{ $question->created_date }}</small>
                                     </p>
                                     <div class="{{ (!empty($question->category->category_name) || Auth::id() == $question->user_id) ? 'col-10' : 'col-12 pr-5' }}">

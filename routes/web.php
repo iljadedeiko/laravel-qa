@@ -4,6 +4,7 @@ use App\Http\Controllers\AnswersController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\FavoritesController;
+use App\Http\Controllers\LeaderboardController;
 use App\Http\Controllers\MarkAnswerController;
 use App\Http\Controllers\QuestionsController;
 use App\Http\Controllers\UserProfileController;
@@ -78,9 +79,16 @@ use Illuminate\Support\Facades\Route;
     Route::post('/questions/{question}/vote-question', ['middleware' => 'auth', 'uses' => VoteQuestionController::class]);
 
     //user profile route
-    Route::get('/user/{user}/profile', [UserProfileController::class, 'show'])->name('user.profile.index');
+    Route::get('/user/{user}/profile', [UserProfileController::class, 'show'])->name('user.profile.show');
 
     Route::get('/user/{user}/profile/edit', [UserProfileController::class, 'edit'])->name('user.profile.edit');
 
     Route::delete('/user/{user}/profile/delete', [UserProfileController::class, 'destroy'])->name('user.profile.destroy');
+
+    Route::put('/user/{user}/profile/update', [UserProfileController::class, 'update'])->name('user.profile.update');
+
+    Route::put('/user/{user}/profile/update-avatar', [UserProfileController::class, 'updateAvatar'])->name('user.profile.update-avatar');
+
+    //Leaderboard
+    Route::get('/leaderboard', [LeaderboardController::class, 'index'])->name('leaderboard.index');
 //});

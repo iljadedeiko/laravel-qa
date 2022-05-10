@@ -67,14 +67,13 @@ class RegisterController extends Controller
         $path = 'images/';
         $fontPath = public_path('fonts/Oliciy.ttf');
         $char = strtoupper($request->name[0]);
-        $newAvatarName = rand(12, 83).time().'_avatar.png';
-        $dest = $path.$newAvatarName;
+        $avatarName = rand(12, 83).time().'_avatar.png';
+        $dest = $path.$avatarName;
 
         $createAvatar = makeAvatar($fontPath, $dest, $char);
-        $picture = $createAvatar == true ? $newAvatarName : '';
+        $picture = $createAvatar == true ? $avatarName : '';
 
         event(new Registered($user = $this->create($request->all(), $picture)));
-        $user->save();
 
         $this->guard()->login($user);
 

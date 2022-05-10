@@ -11,17 +11,18 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
                 <a class="navbar-brand text-white font-bold home-button" href="{{ route('questions.index') }}">
-                    {{ __('All Questions') }}
+                    <h3 class="mb-0">{{ __('All Questions') }}</h3>
                 </a>
-                <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav me-auto">
 
                 </ul>
-                <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
-                    <!-- Authentication Links -->
+                    <a class="d-flex text-decoration-none" href="{{ route('leaderboard.index') }}">
+                        <button type="button" class="btn btn-outline-light mr-4">{{ __('Leaderboard') }}</button>
+                    </a>
+
                     @if (Auth::check())
-                        <a class="d-flex" href="{{ route('favorites.index', Auth::user()) }}">
+                        <a class="d-flex text-decoration-none" href="{{ route('favorites.index', Auth::user()) }}">
                             <button type="button" class="btn btn-outline-light mr-4">{{ __('My Favorites') }}</button>
                         </a>
                     @endif
@@ -48,7 +49,7 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('user.profile.index', Auth::id()) }}">
+                                <a class="dropdown-item" href="{{ route('user.profile.show', Auth::id()) }}">
                                     {{ __('Profile') }}
                                 </a>
                                 <div class="dropdown-divider"></div>

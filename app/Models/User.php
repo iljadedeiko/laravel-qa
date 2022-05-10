@@ -82,6 +82,11 @@ class User extends Authenticatable
             : 'images/avatar-default.png';
     }
 
+    public function getRegisteredAttribute()
+    {
+        return $this->created_at->diffForHumans();
+    }
+
     public function voteAnswer(Answer $answer, $vote)
     {
         $voteAnswers = $this->voteAnswers();

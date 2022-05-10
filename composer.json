@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.0",
+        "ext-gd": "*",
         "doctrine/dbal": "^3.3",
         "erusev/parsedown": "^1.7",
         "fruitcake/laravel-cors": "^2.0",
@@ -17,8 +18,8 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
         "laravolt/avatar": "^4.1",
-        "mews/purifier": "^3.3",
-        "ext-gd": "*"
+        "livewire/livewire": "^2.10",
+        "mews/purifier": "^3.3"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",

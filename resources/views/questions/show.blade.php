@@ -79,10 +79,10 @@
                             <div class="float-right">
                                 <div class="text-muted">{{ __('Asked') }} {{ $question->created_at->format("M d,Y") }} {{ __('at') }} {{ $question->created_at->format("H:i") }}</div>
                                 <div class="media mt-1">
-                                    <a href="{{ route('user.profile.index', $question->user->id) }}" class="pr-2 text-decoration-none">
+                                    <a href="{{ route('user.profile.show', $question->user->id) }}" class="pr-2 text-decoration-none">
                                         <div class="media-body mt-1 d-flex align-items-center">
                                             <img src="{{ asset($question->user->avatar) }}" alt="User avatar" class="user-avatar user-avatar-midi">
-                                            <span class="ml-3">{{ $question->user->name }}</span>
+                                            <h5 class="ml-2 mb-0">{{ $question->user->name }}</h5>
                                         </div>
                                     </a>
                                 </div>

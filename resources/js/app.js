@@ -7,12 +7,6 @@
 require('./bootstrap');
 require('./fontawesome');
 
-window.Vue = require('vue').default;
-
-Vue.component('questions', require('./components/Questions.vue').default);
-
-Vue.component('categories', require('./components/Categories.vue').default);
-
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -24,36 +18,28 @@ Vue.component('categories', require('./components/Categories.vue').default);
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new Vue({
-    el: '#app',
-});
-
-const questions = new Vue({
-    el: '#questions',
-});
-
-const categories = new Vue({
-    el: '#categories',
-});
-
 $(document).ready(function () {
     setTimeout(function() {
-        $('#alert_message, #forgot_password').fadeOut('slow',function() {
-            $('#alertMessage').remove();
+        $('#alert_message, #forgot_password, #invalid_file_path').fadeOut('slow',function() {
+            $('#alert_message, #forgot_password, #invalid_file_path').remove();
         });
     }, 2000);
 
     setTimeout(function() {
+        $('#error_message').fadeOut('slow',function() {
+            $('#error_message').remove();
+        });
+    }, 4000);
+
+    setTimeout(function() {
         $('#invalid_token').fadeOut('slow',function() {
-            $('#alertMessage').remove();
+            $('#invalid_token').remove();
         });
     }, 6000);
 
@@ -70,6 +56,10 @@ $(document).ready(function () {
             'alignright alignjustify | bullist numlist outdent indent | ' +
             'removeformat | help',
         content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+    });
+
+    $('#user_profile_avatar').on('change', function(e) {
+        $(this).closest('form').submit();
     });
 });
 
