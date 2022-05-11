@@ -7,8 +7,8 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="d-flex align-items-center">
-                            <h2>{{ __('Edit user profile') }}</h2>
-                            <div class="ml-auto">
+                            <h2 class="my-2 ml-3">{{ __('Edit user profile') }}</h2>
+                            <div class="ml-auto mr-3">
                                 <a href="{{ route('user.profile.show', $user->id) }}" class="btn btn-outline-secondary">{{ __('Back to profile') }}</a>
                             </div>
                         </div>

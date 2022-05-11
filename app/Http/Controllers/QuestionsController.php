@@ -24,13 +24,7 @@ class QuestionsController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
-        $questions = Question::with('user')
-            ->latest()->paginate(8);
-        $auth = $this->auth;
-        $str = $this->str;
-
-        return view('questions.index', compact('questions', 'str', 'auth', 'categories'));
+        return view('questions.index');
     }
 
     /**

@@ -27,7 +27,6 @@ class FavoritesController extends Controller
         $str = $this->str;
         $categories = Category::all();
         $userFavQuestions = $user->favorites()->latest()->paginate(8);
-//        dd($userFavQuestions);
 
         return view('favorites.index', compact('userFavQuestions', 'categories', 'str'));
     }
@@ -35,6 +34,7 @@ class FavoritesController extends Controller
     public function store(Question $question)
     {
         $question->favorites()->attach(Auth::id());
+
         return back();
     }
 

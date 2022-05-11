@@ -11,15 +11,6 @@
                             <h2 class="mr-auto my-favorites">
                                 {{ __('My Favorites Questions') }}
                             </h2>
-                            {{--                            <div class="dropdown pr-4">--}}
-                            {{--                                <select class="form-control categories" name="categories" id="categories">--}}
-                            {{--                                    <option selected>{{ __('All questions') }}</option>--}}
-                            {{--                                    @foreach ($categories as $category)--}}
-                            {{--                                        <option value="{{ $category->id }}">{{ $category->category_name }}</option>--}}
-                            {{--                                    @endforeach--}}
-                            {{--                                </select>--}}
-                            {{--                            </div>--}}
-                            <categories :categories="{{$categories}}"></categories>
                         </div>
                     </div>
                     <div class="card-body">
@@ -58,12 +49,11 @@
                                 </div>
 
                                 <div class="media-body">
-                                    <div class="d-flex align-items-center">
-                                        <h3 class="mt-0
-                                            {{ (!empty($favQuestion->category->category_name) || Auth::id() == $favQuestion->user_id) ? 'col-10' : 'col-12 pr-5' }}">
+                                    <div class="d-flex justify-content-between">
+                                        <h3 class="col-8 mt-0{{ (!empty($favQuestion->category->category_name) || Auth::id() == $favQuestion->user_id) ? 'col-10' : 'col-12 pr-5' }}">
                                             <a href="{{ $favQuestion->url }}">{{ $favQuestion->title }}</a>
                                         </h3>
-                                        <div class="ml-auto col-2">
+                                        <div class="col-2 mr-5">
                                             @if (!empty($favQuestion->category->category_name))
                                                 <h4 class="text-primary font-weight-bold">{{ $favQuestion->category->category_name }}</h4>
                                             @endif

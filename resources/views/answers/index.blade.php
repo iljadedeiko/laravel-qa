@@ -83,6 +83,9 @@
                                             <div class="media-body mt-1 d-flex align-items-center">
                                                 <img src="{{ asset($answer->user->avatar) }}" alt="User avatar" class="user-avatar user-avatar-mini">
                                                 <h5 class="ml-2 mb-0">{{ $answer->user->name }}</h5>
+                                                @if ($answer->user->id == $question->user->id)
+                                                    <i class="ml-1 fa-solid fa-star" alt="Question owner"></i>
+                                                @endif
                                             </div>
                                         </a>
                                     </div>
