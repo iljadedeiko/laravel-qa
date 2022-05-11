@@ -17,7 +17,7 @@ class Leaderboard extends Component
     public function render()
     {
         return view('livewire.leaderboard', [
-            'users' => User::when($this->term, function($query, $term) {
+            'users' => User::when($this->term, function ($query, $term) {
                 return $query->where('name', 'LIKE', "%$term%")
                     ->orWhere('email', 'LIKE', "%$term%");
             })

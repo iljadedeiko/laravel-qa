@@ -50,6 +50,7 @@ h1 {
             color: $white-color;
         }
     }
+
     .view {
         margin-top: 10px;
     }
@@ -74,6 +75,7 @@ form.form-delete {
         &.votes-count {
             font-size: 25px;
         }
+
         &.favorites-count {
             font-size: 12px;
         }
@@ -129,10 +131,19 @@ form.form-delete {
 }
 
 .home-button {
-    font-size: 20px;
     margin-left: 3rem;
 }
 
+.home-button, .leaderboard-link, .favorites-link {
+    font-size: 1.3rem;
+    color: white;
+}
+
+.home-button:hover, .leaderboard-link:hover, .favorites-link:hover {
+    color:black;
+}
+
+.home-button, .leaderboard-link, .favorites-link
 .back-home {
     display: flex;
     align-items: center;
@@ -190,6 +201,7 @@ form.form-delete {
 
 .answers, .questions {
     padding: 20px 0;
+
     &:not(:last-child) {
         border-bottom: 1px solid rgba($black, .1);
     }
@@ -197,7 +209,7 @@ form.form-delete {
 
 .invalid-feedback {
     font-size: 100%;
-    text-align: left!important;
+    text-align: left !important;
 }
 
 .user-actions {
@@ -401,17 +413,17 @@ form.form-delete {
 }
 
 .profile-head .nav-tabs {
-    margin-bottom:5%;
+    margin-bottom: 5%;
 }
 
 .profile-head .nav-tabs .nav-link {
-    font-weight:600;
+    font-weight: 600;
     border: none;
 }
 
 .profile-head .nav-tabs .nav-link.active {
     border: none;
-    border-bottom:2px solid #0062cc;
+    border-bottom: 2px solid #0062cc;
 }
 
 .profile-work {
@@ -461,5 +473,9 @@ form.form-delete {
 
 .questions-header {
     margin-bottom: 0;
+}
+
+.leaderboard-link, .favorites-link {
+
 }
 

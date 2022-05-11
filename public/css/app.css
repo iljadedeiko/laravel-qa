@@ -10124,11 +10124,19 @@ form.form-delete {
 }
 
 .home-button {
-  font-size: 20px;
   margin-left: 3rem;
 }
 
-.back-home {
+.home-button, .leaderboard-link, .favorites-link {
+  font-size: 1.3rem;
+  color: white;
+}
+
+.home-button:hover, .leaderboard-link:hover, .favorites-link:hover {
+  color: black;
+}
+
+.home-button, .leaderboard-link, .favorites-link .back-home {
   display: flex;
   align-items: center;
   justify-content: center;

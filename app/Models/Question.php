@@ -12,7 +12,7 @@ class Question extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['category_id' ,'title', 'body'];
+    protected $fillable = ['category_id', 'title', 'body'];
 
     public function user()
     {

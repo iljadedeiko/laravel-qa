@@ -5,12 +5,31 @@ import {faCaretUp,
     faCaretDown,
     faStar,
     faPlus,
-    faCheck } from '@fortawesome/free-solid-svg-icons';
+    faCheck,
+    faComment,
+    faMessage,
+    faQuestion,
+    faMagnifyingGlass,
+    faHome,
+    faEnvelope,
+    faPhone,
+    faPrint,
+    faCircleQuestion
+    } from '@fortawesome/free-solid-svg-icons';
 
 library.add(faCaretUp,
     faCaretDown,
     faStar,
     faPlus,
-    faCheck);
+    faCheck,
+    faComment,
+    faMessage,
+    faQuestion,
+    faMagnifyingGlass,
+    faHome,
+    faEnvelope,
+    faPhone,
+    faPrint,
+    faCircleQuestion);
 
 dom.watch()

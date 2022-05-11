@@ -4,30 +4,33 @@
             <a class="navbar-brand" href="{{ url('/') }}">
                 <img src="{{ asset('images/logo.png') }}" class="app-logo" alt="app-logo">
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="navbar-nav">
+                    <a class="text-decoration-none nav-item nav-link" href="{{ route('questions.index') }}">
+                        <span class="mb-0 home-button">{{ __('All Questions') }}</span>
+                    </a>
 
-                <a class="navbar-brand text-white font-bold home-button" href="{{ route('questions.index') }}">
-                    <h3 class="mb-0">{{ __('All Questions') }}</h3>
-                </a>
-                <ul class="navbar-nav me-auto">
-
-                </ul>
-                <ul class="navbar-nav ml-auto">
-                    <a class="d-flex text-decoration-none" href="{{ route('leaderboard.index') }}">
-                        <button type="button" class="btn btn-outline-light mr-4">{{ __('Leaderboard') }}</button>
+                    <a class="text-decoration-none nav-item nav-link ml-3"
+                       href="{{ route('leaderboard.index') }}">
+                        <span class="mb-0 leaderboard-link">{{ __('Leaderboard') }}</span>
                     </a>
 
                     @if (Auth::check())
-                        <a class="d-flex text-decoration-none" href="{{ route('favorites.index', Auth::user()) }}">
-                            <button type="button" class="btn btn-outline-light mr-4">{{ __('My Favorites') }}</button>
+                        <a class="text-decoration-none nav-item nav-link ml-3"
+                           href="{{ route('favorites.index', Auth::user()) }}">
+                            <span class="mb-0 favorites-link">{{ __('My Favorites') }}</span>
                         </a>
                     @endif
+                </div>
 
-                        @guest
+                <ul class="navbar-nav ml-auto">
+                    @guest
                         @if (Route::has('login'))
                             <li class="nav-item">
                                 <a class="nav-link h5 text-white mr-2 user-actions" href="{{ route('login') }}">
@@ -38,13 +41,16 @@
 
                         @if (Route::has('register'))
                             <li class="nav-item">
-                                <a class="nav-link h5 text-white user-actions" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                <a class="nav-link h5 text-white user-actions"
+                                   href="{{ route('register') }}">{{ __('Register') }}</a>
                             </li>
                         @endif
                     @else
                         <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle h5 text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                <img src="{{ asset(Auth::user()->avatar) }}" alt="User avatar" class="user-avatar-mini user-avatar">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle h5 text-white" href="#" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <img src="{{ asset(Auth::user()->avatar) }}" alt="User avatar"
+                                     class="user-avatar-mini user-avatar">
                                 {{ Auth::user()->name }}
                             </a>
 

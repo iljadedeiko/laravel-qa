@@ -20,7 +20,7 @@ class UserProfileController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\User  $user
+     * @param \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
     public function show(User $user)
@@ -31,7 +31,7 @@ class UserProfileController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\User  $user
+     * @param \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user)
@@ -46,8 +46,8 @@ class UserProfileController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $user
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
     public function update(UserProfileUpdateRequest $request, User $user)
@@ -76,7 +76,7 @@ class UserProfileController extends Controller
         if (!isset($file)) {
             return back()->with('error', __('A new avatar must be selected'));
         }
-        $new_name = 'AVATAR_'.date('Ymd').uniqid().'.jpg';
+        $new_name = 'AVATAR_' . date('Ymd') . uniqid() . '.jpg';
 
         $upload = $file->move(public_path($path), $new_name);
         if (!$upload) {
@@ -101,7 +101,7 @@ class UserProfileController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\User  $user
+     * @param \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
     public function destroy(User $user)

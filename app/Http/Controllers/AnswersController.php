@@ -14,10 +14,11 @@ class AnswersController extends Controller
     {
         $this->middleware('auth');
     }
+
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, Question $question)
@@ -36,7 +37,7 @@ class AnswersController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Answer  $answer
+     * @param \App\Models\Answer $answer
      * @return \Illuminate\Http\Response
      */
     public function edit(Question $question, Answer $answer)
@@ -51,8 +52,8 @@ class AnswersController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Answer  $answer
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Answer $answer
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Question $question, Answer $answer)
@@ -71,7 +72,7 @@ class AnswersController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Answer  $answer
+     * @param \App\Models\Answer $answer
      * @return \Illuminate\Http\Response
      */
     public function destroy(Question $question, Answer $answer)

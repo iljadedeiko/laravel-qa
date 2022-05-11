@@ -6,60 +6,38 @@
                 <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
                     <h6 class="text-uppercase fw-bold mb-4">
                         <a class="text-muted text-decoration-none" href="{{ route('login') }}">
-                            <i class="fas fa-gem me-3"></i>
+                            <i class="fas fa-circle-question me-3"></i>
                             {{ __('AskDeveloper') }}
                         </a>
                     </h6>
-                    <p>
-                        Here you can use rows and columns to organize your footer content. Lorem ipsum
-                        dolor sit amet, consectetur adipisicing elit.
-                    </p>
+                    <p>The web application is produced to bring together software developers with different skills and
+                        any kind of experience.</p>
+                    <b>Never Code Alone !</b>
                 </div>
                 <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
                     <h6 class="text-uppercase fw-bold mb-4">
-                        Products
+                        <p>Popular categories</p>
                     </h6>
-                    <p>
-                        <a href="#!" class="text-reset">Angular</a>
-                    </p>
-                    <p>
-                        <a href="#!" class="text-reset">React</a>
-                    </p>
-                    <p>
-                        <a href="#!" class="text-reset">Vue</a>
-                    </p>
-                    <p>
-                        <a href="#!" class="text-reset">Laravel</a>
-                    </p>
+                    <p>Python</p>
+                    <p>PHP</p>
+                    <p>Javascript</p>
                 </div>
                 <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-                    <h6 class="text-uppercase fw-bold mb-4">
-                        Useful links
-                    </h6>
-                    <p>
-                        <a href="#!" class="text-reset">Pricing</a>
-                    </p>
-                    <p>
-                        <a href="#!" class="text-reset">Settings</a>
-                    </p>
-                    <p>
-                        <a href="#!" class="text-reset">Orders</a>
-                    </p>
-                    <p>
-                        <a href="#!" class="text-reset">Help</a>
+                    <p class="text-uppercase">
+                        <a href="{{ route('leaderboard.index') }}" class="text-reset">Leaderboard</a>
                     </p>
                 </div>
                 <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
                     <h6 class="text-uppercase fw-bold mb-4">
-                        Contact
+                        <p>Contact Us</p>
                     </h6>
-                    <p><i class="fas fa-home me-3"></i> New York, NY 10012, US</p>
+                    <p><i class="fas fa-home me-3"></i>Vilnius, Lithuania</p>
                     <p>
                         <i class="fas fa-envelope me-3"></i>
                         info@example.com
                     </p>
-                    <p><i class="fas fa-phone me-3"></i> + 01 234 567 88</p>
-                    <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p>
+                    <p><i class="fas fa-phone me-3"></i> + 370 234 567 88</p>
+                    <p><i class="fas fa-print me-3"></i> + 370 234 567 89</p>
                 </div>
             </div>
         </div>
