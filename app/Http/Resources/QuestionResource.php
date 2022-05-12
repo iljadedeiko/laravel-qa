@@ -9,7 +9,7 @@ class QuestionResource extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
     public function toArray($request)
@@ -28,8 +28,7 @@ class QuestionResource extends JsonResource
             'status' => $this->status,
             'url' => $this->url,
             'user_url' => $this->user->url,
-            'created_date'=> $this->created_date,
+            'created_date' => $this->created_date,
         ];
-        return parent::toArray($request);
     }
 }

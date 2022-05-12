@@ -24,7 +24,6 @@
         <div class="card-body">
             @include('layouts.successMessage')
             @include('layouts.warningMessage')
-
             @if (count($questions) < 1)
                 <div class="alert alert-warning">
                     <strong>{{ __('No questions were found.') }}</strong> {{ __('Create a new question and it will appear here !') }}
@@ -33,7 +32,6 @@
                 @foreach ($questions as $question)
 
                     @include('questions.deleteModal')
-
                     <div class="media questions">
                         <div class="d-flex flex-column counters">
                             <div class="vote">
@@ -63,7 +61,7 @@
                                     @endcan
 
                                     @can('delete-question', $question)
-                                        <a href="#deleteModal" data-toggle="modal">
+                                        <a data-toggle="modal" data-target="#deleteModal">
                                             <button type="submit" class="btn btn-sm btn-outline-danger">
                                                 {{ __('Delete') }}
                                             </button>

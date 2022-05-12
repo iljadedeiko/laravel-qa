@@ -30,7 +30,7 @@
             </div>
         @endif
         <div class="tab-pane" id="preview-tab">
-            <textarea name="test-code-block" id="test_code_block" rows="10" class="form-control"></textarea>
+            <livewire:compiler>
         </div>
     </div>
 </div>

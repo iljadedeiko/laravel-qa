@@ -10,7 +10,7 @@
                             {{ __('AskDeveloper') }}
                         </a>
                     </h6>
-                    <p>The web application is produced to bring together software developers with different skills and
+                    <p>This web application is developed to bring together software developers with different skills and
                         any kind of experience.</p>
                     <b>Never Code Alone !</b>
                 </div>

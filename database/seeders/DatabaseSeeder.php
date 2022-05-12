@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Answer;
+use App\Models\ProgLanguages;
 use App\Models\Question;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -19,7 +20,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             QuestionsAnswersUsersSeeder::class,
             FavoritesSeeder::class,
-            CategorySeeder::class
+            CategorySeeder::class,
+            ProgLanguagesSedeer::class
         ]);
     }
 }

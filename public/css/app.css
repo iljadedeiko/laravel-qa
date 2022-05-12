@@ -10462,3 +10462,20 @@ form.form-delete {
 .questions-header {
   margin-bottom: 0;
 }
+
+.code-output {
+  background-color: #3C4145 !important;
+  color: white;
+}
+
+.code-output::-moz-placeholder {
+  color: white;
+}
+
+.code-output:-ms-input-placeholder {
+  color: white;
+}
+
+.code-output::placeholder {
+  color: white;
+}

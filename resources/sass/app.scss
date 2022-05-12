@@ -85,7 +85,7 @@ form.form-delete {
         cursor: pointer;
         color: $gray-600;
 
-        &.off, &.off:hover {
+        &.off, &.off:hover{
             color: $gray-500;
         }
 
@@ -475,7 +475,11 @@ form.form-delete {
     margin-bottom: 0;
 }
 
-.leaderboard-link, .favorites-link {
-
+.code-output {
+    background-color: #3C4145!important;
+    color: white;
 }
 
+.code-output::placeholder {
+    color: white;
+}

@@ -36,7 +36,7 @@
                                     <span class="votes-count">{{ $answer->votes_count }}</span>
 
                                     <a title="{{ __('Mark this answer as not useful') }}"
-                                       class="vote-down {{ $auth::guest() ? 'off' : '' }}
+                                       class="vote-down down-vote {{ $auth::guest() ? 'off' : '' }}
                                        {{ ($answer->user->id == $auth::id()) ? 'off' : '' }}"
                                        onclick="event.preventDefault(); document.getElementById('vote-down-answer-{{ $answer->id }}').submit();">
                                         <i class="fas fa-caret-down fa-3x"></i>

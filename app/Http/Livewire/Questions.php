@@ -11,20 +11,19 @@ class Questions extends Component
 {
     public $str = "\Illuminate\Support\Str";
 
-    public $selectedCategory;
+    public $selectedCategory = null;
 
     public function questionsQuery($category)
     {
-        if ($this->selectedCategory == '') {
-            $query = Question::with('user')
-                ->latest()->paginate(8);
-        } elseif ($this->selectedCategory == 'my_questions') {
+        if ($this->selectedCategory == 'my_questions') {
             $query = Question::with('user')
                 ->where('user_id', Auth::id())
                 ->latest()->paginate(8);
         } else {
             $query = Question::with('user')
-                ->where('category_id', $category)
+                ->when($this->selectedCategory, function ($query) {
+                    $query->where('category_id', $this->selectedCategory);
+                })
                 ->latest()->paginate(8);
         }
 
