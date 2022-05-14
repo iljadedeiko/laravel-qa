@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Service;
 
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Facades\Http;
 
 class CompilerAPI
@@ -17,13 +18,17 @@ class CompilerAPI
 
     public function fetchData()
     {
-        $response = Http::post('https://api.jdoodle.com/v1/execute', [
-            "clientId" => "8e4a20639e427767c72eeb155df3a0cc",
-            "clientSecret" => "ba51f3113248fb04a1ea2d7a1aa67adb88f3c4fc64fe77988e05f3f4cee119ea",
-            "script" => $this->script,
-            "language" => $this->language,
-            "versionIndex" => "0"
-        ]);
+        try {
+            $response = Http::post('https://api.jdoodle.com/v1/execute', [
+                "clientId" => "c95575ff0dcf59d2164301cf4e5a5800",
+                "clientSecret" => "4d7e9ca6b218157d1b87ae8e83dba2af5f1940f77a684642a447db248df6901",
+                "script" => $this->script,
+                "language" => $this->language,
+                "versionIndex" => "0"
+            ]);
+        } catch (HttpResponseException $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
 
         return $response->json();
     }

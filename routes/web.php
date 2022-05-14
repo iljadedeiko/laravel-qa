@@ -18,15 +18,6 @@ use Illuminate\Support\Facades\Route;
 | Web Routes
 |--------------------------------------------------------------------------
 */
-//Route::get('/', function () {
-//    return redirect(app()->getLocale());
-//});
-
-//Route::group([
-//    'prefix' => '{locale}',
-//    'where' => ['locale' => '[a-zA-Z]{2}'],
-//    'middleware' => 'setLocale',
-//], function() {
 
     Auth::routes();
 
@@ -91,4 +82,3 @@ use Illuminate\Support\Facades\Route;
 
     //Leaderboard
     Route::get('/leaderboard', [LeaderboardController::class, 'index'])->name('leaderboard.index');
-//});
