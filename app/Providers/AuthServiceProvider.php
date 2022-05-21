@@ -2,11 +2,9 @@
 
 namespace App\Providers;
 
-use App\Models\Question;
-use App\Policies\QuestionPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
-
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -16,7 +14,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        Question::class => QuestionPolicy::class,
+        //
     ];
 
     /**
@@ -33,7 +31,35 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('delete-question', function($user, $question) {
+            return $user->id === $question->user_id && $question->answers_count < 1;
+        });
+
+        Gate::define('update-answer', function($user, $answer) {
+            return $user->id === $answer->user_id;
+        });
+
+        Gate::define('delete-answer', function($user, $answer) {
+            return $user->id === $answer->user_id;
+        });
+
+        Gate::define('mark-best-answer', function($user, $answer) {
+            return $user->id === $answer->question->user_id;
+        });
+
+        Gate::define('vote-own-answer', function($user, $answer) {
+            return $user->id === $answer->user_id;
+        });
+
+        Gate::define('vote-own-question', function($user, $question) {
             return $user->id === $question->user_id;
+        });
+
+        Gate::define('update-profile', function($user, $profileUserId) {
+            return $user->id === $profileUserId->id;
+        });
+
+        Gate::define('delete-profile', function($user, $profileUserId) {
+            return $user->id === $profileUserId->id;
         });
     }
 }

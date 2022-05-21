@@ -7,8 +7,21 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+body {
+    background: #F7F7F7;
+}
+
+li, p, input {
+    font-family: "Helvetica Neue", sans-serif;
+    font-size: 14px;
+}
+
+h1 {
+    font-family: "Nunito", sans-serif;
+}
+
 .counters {
-    margin-right: 30px;
+    margin-right: 20px;
     font-size: 10px;
     text-align: center;
 
@@ -32,11 +45,12 @@
             color: $light-green-color;
         }
 
-        &.answered-accepted {
+        &.answered-marked {
             background: $light-green-color;
             color: $white-color;
         }
     }
+
     .view {
         margin-top: 10px;
     }
@@ -44,4 +58,428 @@
 
 form.form-delete {
     display: inline;
+}
+
+.vote-controls {
+    min-width: 60px;
+    margin-right: 30px;
+    text-align: center;
+    color: $gray-700;
+
+    span, a {
+        display: block;
+        color: #495057;
+    }
+
+    span {
+        &.votes-count {
+            font-size: 25px;
+        }
+
+        &.favorites-count {
+            font-size: 12px;
+        }
+    }
+
+    a {
+        cursor: pointer;
+        color: $gray-600;
+
+        &.off, &.off:hover{
+            color: $gray-500;
+        }
+
+        &.favorite {
+            &.favorited, &.favorited:hover {
+                color: $warning;
+            }
+        }
+
+        &.answer-accepted {
+            color: $green;
+        }
+    }
+}
+
+.mark-answer {
+    display: none;
+}
+
+.navigation-menu {
+    background-color: #84A9E3;
+}
+
+.app-logo {
+    width: 50px;
+}
+
+.login-form, .register-form {
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.questions-block {
+    margin-bottom: 150px;
+}
+
+.vote-controls a.cursor-not-allowed {
+    cursor: not-allowed;
+}
+
+.my-favorites {
+    margin-left: 40px;
+}
+
+.home-button {
+    margin-left: 3rem;
+}
+
+.home-button, .leaderboard-link, .favorites-link {
+    font-size: 1.3rem;
+    color: white;
+}
+
+.home-button:hover, .leaderboard-link:hover, .favorites-link:hover {
+    color:black;
+}
+
+.home-button, .leaderboard-link, .favorites-link
+.back-home {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.favorite-media-block {
+    position: relative;
+}
+
+.remove-favorite {
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.remove-favorite-hidden {
+    display: none;
+}
+
+.remove-favorite:hover .remove-favorite-hidden {
+    display: block;
+}
+
+.remove-favorite:hover .remove-favorite-visible {
+    display: none;
+}
+
+.sign-button {
+    border-radius: 20px;
+    letter-spacing: .2em;
+}
+
+.question-show-container {
+    margin-bottom: 8rem;
+}
+
+.vote-up:hover {
+    color: #73D52A;
+}
+
+.vote-down:hover {
+    color: #F55F36;
+}
+
+.mark-best-answer:hover {
+    color: #27A745;
+}
+
+.favorite:hover {
+    color: #FFC12B;
+}
+
+.answers, .questions {
+    padding: 20px 0;
+
+    &:not(:last-child) {
+        border-bottom: 1px solid rgba($black, .1);
+    }
+}
+
+.invalid-feedback {
+    font-size: 100%;
+    text-align: left !important;
+}
+
+.user-actions {
+    letter-spacing: 0.1rem;
+}
+
+.password-reset {
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.user-avatar {
+    clip-path: circle();
+}
+
+.user-avatar-mini {
+    width: 40px;
+}
+
+.user-avatar-midi {
+    width: 50px;
+}
+
+/* DELETE CONFIRMATION MODAL START
+ * -------------------------------
+*/
+
+.modal-confirm {
+    color: #636363;
+    width: 400px;
+    margin-top: 10rem;
+}
+
+.modal-confirm .modal-content {
+    padding: 20px;
+    border-radius: 5px;
+    border: none;
+    text-align: center;
+    font-size: 14px;
+}
+
+.modal-confirm .modal-header {
+    border-bottom: none;
+    position: relative;
+}
+
+.modal-confirm h4 {
+    text-align: center;
+    font-size: 26px;
+    margin: 30px 0 -10px;
+}
+
+.modal-confirm .close {
+    position: absolute;
+    top: -5px;
+    right: -2px;
+}
+
+.modal-confirm .modal-body {
+    color: #999;
+}
+
+.modal-confirm .modal-footer {
+    border: none;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 13px;
+    padding: 10px 15px 25px;
+}
+
+.modal-confirm .modal-footer a {
+    color: #999;
+}
+
+.modal-confirm .icon-box {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+    border-radius: 50%;
+    z-index: 9;
+    text-align: center;
+    border: 3px solid #f15e5e;
+}
+
+.modal-confirm .icon-box i {
+    color: #f15e5e;
+    font-size: 46px;
+    display: inline-block;
+    margin-top: 13px;
+}
+
+.modal-confirm .btn, .modal-confirm .btn:active {
+    color: #fff;
+    border-radius: 4px;
+    background: #60c7c1;
+    text-decoration: none;
+    transition: all 0.4s;
+    line-height: normal;
+    min-width: 120px;
+    border: none;
+    min-height: 40px;
+    margin: 0 5px;
+}
+
+.modal-confirm .btn-secondary {
+    background: #c1c1c1;
+}
+
+.modal-confirm .btn-secondary:hover, .modal-confirm .btn-secondary:focus {
+    background: #a8a8a8;
+}
+
+.modal-confirm .btn-danger {
+    background: #f15e5e;
+}
+
+.modal-confirm .btn-danger:hover, .modal-confirm .btn-danger:focus {
+    background: #ee3535;
+}
+
+.trigger-btn {
+    display: inline-block;
+    margin: 100px auto;
+}
+
+.modal-confirm .modal-body p {
+    font-size: 16px;
+    color: #1d2124;
+}
+
+/* DELETE CONFIRMATION MODAL ENDS
+ * ------------------------------
+*/
+
+/* USER PROFILE START
+ * ------------------
+*/
+
+.emp-profile {
+    padding: 1% 3% 3% 3%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    border-radius: 0.5rem;
+    background: #fff;
+}
+
+.profile-img {
+    text-align: center;
+}
+
+.profile-img img {
+    width: 70%;
+    height: 100%;
+}
+
+.profile-img .file {
+    position: relative;
+    overflow: hidden;
+    margin-top: -20%;
+    width: 70%;
+    border: none;
+    border-radius: 0;
+    font-size: 15px;
+    background: #212529b8;
+}
+
+.profile-img .file input {
+    position: absolute;
+    opacity: 0;
+    right: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.profile-head h5 {
+    color: #333;
+}
+
+.profile-head h6 {
+    color: #0062cc;
+}
+
+.profile-btn {
+    border-radius: 1.5rem;
+}
+
+.proile-rating {
+    font-size: 14px;
+    letter-spacing: 1px;
+    font-weight: bold;
+    color: #818182;
+    margin-top: 5%;
+}
+
+.proile-rating span {
+    color: #495057;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.profile-head .nav-tabs {
+    margin-bottom: 5%;
+}
+
+.profile-head .nav-tabs .nav-link {
+    font-weight: 600;
+    border: none;
+}
+
+.profile-head .nav-tabs .nav-link.active {
+    border: none;
+    border-bottom: 2px solid #0062cc;
+}
+
+.profile-work {
+    margin-top: 1.5rem;
+}
+
+.profile-work p {
+    font-size: 12px;
+    color: #818182;
+    font-weight: 600;
+}
+
+.profile-work a {
+    text-decoration: none;
+    color: #495057;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.profile-work ul {
+    list-style: none;
+}
+
+.profile-tab label {
+    font-weight: 600;
+}
+
+.profile-tab p {
+    font-weight: 600;
+    color: #0062cc;
+}
+
+.user-avatar-change:hover {
+    background-color: #08A2FA;
+}
+
+.user-avatar-change input {
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    cursor: pointer;
+}
+
+/* USER PROFILE ENDS
+ * -----------------
+*/
+
+.questions-header {
+    margin-bottom: 0;
+}
+
+.code-output {
+    background-color: #3C4145!important;
+    color: white;
+}
+
+.code-output::placeholder {
+    color: white;
 }

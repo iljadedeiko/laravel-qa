@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Answer;
+use App\Models\ProgLanguages;
 use App\Models\Question;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -16,15 +17,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::factory()->count(3)->create()->each(function($user) {
-            $user->questions()->saveMany(
-                Question::factory()->count(rand(1,5))->make()
-            )
-            ->each(function($question) {
-                $question->answers()
-                    ->saveMany(Answer::factory()
-                    ->count(rand(1, 5))->make());
-            });
-        });
+        $this->call([
+            QuestionsAnswersUsersSeeder::class,
+            FavoritesSeeder::class,
+            CategorySeeder::class,
+            ProgLanguagesSedeer::class
+        ]);
     }
 }

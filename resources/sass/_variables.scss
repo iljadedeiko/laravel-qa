@@ -1,5 +1,8 @@
+//Colors
+$white-color: #fff;
+
 // Body
-$body-bg: #f8fafc;
+$body-bg: $white-color;
 
 // Typography
 $font-family-sans-serif: 'Nunito', sans-serif;
@@ -8,4 +11,8 @@ $line-height-base: 1.6;
 
 $light-green-color: rgb(108, 190, 112);
 
-$white-color: #fff;
+$primary: #007bff;
+$success: #28a745;
+$warning: #ffc107;
+$danger: #dc3545;
+
